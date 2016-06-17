@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(OnlineAuction.Startup))]
-
+[assembly: OwinStartupAttribute(typeof(OnlineAuction.Startup))]
 namespace OnlineAuction
 {
     public partial class Startup

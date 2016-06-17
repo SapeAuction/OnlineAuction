@@ -1,0 +1,36 @@
+﻿@using Auction.Entity
+@model IEnumerable<BidParticipantInformation>
+
+@{
+    ViewBag.Title = "BidInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BidInfo</h2>
+
+<table style="border: 1px solid black;">
+    <thead>
+        <tr>
+            <td>
+                User ID
+            </td>
+            <td>Bid Price</td>
+            <td>Bid Creation Date</td>
+        </tr>
+    </thead>
+    @foreach (var bid in Model)
+    {
+        <tr>
+            <td>
+                @bid.UserId
+            </td>
+            <td>
+                @bid.BidPrice
+            </td>
+            <td>
+                @bid.BidCreationDateTime
+            </td>
+        </tr>
+    }
+
+</table>
