@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AuctionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AuctionInformation">
+    <Key>
+      <PropertyRef Name="AuctionInformationId" />
+    </Key>
+    <Property Name="AuctionInformationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="CreatedByUserId" Type="int" Nullable="false" />
+    <Property Name="BidStartDateTime" Type="datetime" Nullable="false" />
+    <Property Name="BidEndDateTime" Type="datetime" Nullable="false" />
+    <Property Name="BidDescription" Type="nvarchar" MaxLength="512" />
+    <Property Name="BidBasePrice" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BidParticipantInformation">
+    <Key>
+      <PropertyRef Name="BidParticipantInformationId" />
+    </Key>
+    <Property Name="BidParticipantInformationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="AuctionInformationId" Type="int" Nullable="false" />
+    <Property Name="BidPrice" Type="money" Nullable="false" />
+    <Property Name="BidCreationDateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductDescription" Type="nvarchar" MaxLength="512" />
+    <Property Name="ProductImageUrl" Type="varchar(max)" />
+    <Property Name="ProductTypeId" Type="int" Nullable="false" />
+    <Property Name="ProductStatus" Type="bit" />
+  </EntityType>
+  <EntityType Name="ProductType">
+    <Key>
+      <PropertyRef Name="ProductTypeId" />
+    </Key>
+    <Property Name="ProductTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductTypeDescription" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="30" />
+    <Property Name="Status" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AuctionInformation_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="AuctionInformation" Type="Self.AuctionInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="AuctionInformation">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AuctionInformation_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="AuctionInformation" Type="Self.AuctionInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AuctionInformation">
+        <PropertyRef Name="CreatedByUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BidParticipantInformation_AuctionInformation">
+    <End Role="AuctionInformation" Type="Self.AuctionInformation" Multiplicity="1" />
+    <End Role="BidParticipantInformation" Type="Self.BidParticipantInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AuctionInformation">
+        <PropertyRef Name="AuctionInformationId" />
+      </Principal>
+      <Dependent Role="BidParticipantInformation">
+        <PropertyRef Name="AuctionInformationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BidParticipantInformation_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="BidParticipantInformation" Type="Self.BidParticipantInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="BidParticipantInformation">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_ProductType">
+    <End Role="ProductType" Type="Self.ProductType" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductType">
+        <PropertyRef Name="ProductTypeId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="ProductTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AuctionDBModelStoreContainer">
+    <EntitySet Name="AuctionInformation" EntityType="Self.AuctionInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BidParticipantInformation" EntityType="Self.BidParticipantInformation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductType" EntityType="Self.ProductType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AuctionInformation_Product" Association="Self.FK_AuctionInformation_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="AuctionInformation" EntitySet="AuctionInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AuctionInformation_User" Association="Self.FK_AuctionInformation_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="AuctionInformation" EntitySet="AuctionInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BidParticipantInformation_AuctionInformation" Association="Self.FK_BidParticipantInformation_AuctionInformation">
+      <End Role="AuctionInformation" EntitySet="AuctionInformation" />
+      <End Role="BidParticipantInformation" EntitySet="BidParticipantInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BidParticipantInformation_User" Association="Self.FK_BidParticipantInformation_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="BidParticipantInformation" EntitySet="BidParticipantInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_ProductType" Association="Self.FK_Product_ProductType">
+      <End Role="ProductType" EntitySet="ProductType" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
