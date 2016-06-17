@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Auction.WebApi.Sevices.Interfaces;
+using Auction.Entity;
 
 namespace AuctionWebApi.Controllers
 {
@@ -18,9 +18,9 @@ namespace AuctionWebApi.Controllers
         }
 
         // GET: api/Product
-        public IEnumerable<string> Get()
+        public IEnumerable<Product> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _repository.GetAllProducts();
         }
 
         // GET: api/Product/5
@@ -30,8 +30,22 @@ namespace AuctionWebApi.Controllers
         }
 
         // POST: api/Product
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]Product inputEntity)
         {
+            if (inputEntity == null)
+            {
+                throw new ArgumentNullException();
+            }
+            else
+            {
+               int status = _repository.CreateProduct(inputEntity);
+                if (status > 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "Product created YAYYAY");
+                }
+            }
+
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
         }
 
         // PUT: api/Product/5
