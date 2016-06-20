@@ -20,20 +20,20 @@ namespace Auction.UI.Sevices
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:58167/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //client.BaseAddress = new Uri("http://localhost:58167/");
+                //client.DefaultRequestHeaders.Accept.Clear();
+                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                //  HttpResponseMessage responseMessage = await client.GetAsync(url);
-                HttpResponseMessage responseMessage = client.GetAsync("api/product/1").Result;
+                ////  HttpResponseMessage responseMessage = await client.GetAsync(url);
+                //HttpResponseMessage responseMessage = client.GetAsync("api/product/1").Result;
 
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    var responseData = responseMessage.Content.ReadAsStringAsync().Result;
-                    _Prod = JsonConvert.DeserializeObject<Product>(responseData);
-                }
+                //if (responseMessage.IsSuccessStatusCode)
+                //{
+                //    var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                //    _Prod = JsonConvert.DeserializeObject<Product>(responseData);
+                //}
             }
-            return _Prod;
+            return 1;
         }
 
         public bool DeleteProduct(int productId)
