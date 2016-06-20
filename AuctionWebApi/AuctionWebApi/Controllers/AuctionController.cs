@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Auction.WebApi.Sevices.Interfaces;
+using Auction.Entity;
 
 namespace AuctionWebApi.Controllers
 {
@@ -18,30 +19,44 @@ namespace AuctionWebApi.Controllers
         }
 
         // GET: api/Auction
-        public IEnumerable<string> Get()
+        public IEnumerable<AuctionInformation> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _repository.GetAllAuctionInformation();
         }
 
         // GET: api/Auction/5
-        public string Get(int id)
+        public AuctionInformation Get(int id)
         {
-            return "value";
+
+            return _repository.GetAuctionInformationById(id);
         }
 
         // POST: api/Auction
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]AuctionInformation value)
         {
+            _repository.UpdateAuctionInformation(value);
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
         // PUT: api/Auction/5
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE: api/Auction/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
+            if (_repository.DeleteAuctionInformation(id))
+            {
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.ExpectationFailed);
+            }
+
         }
     }
 }
+
