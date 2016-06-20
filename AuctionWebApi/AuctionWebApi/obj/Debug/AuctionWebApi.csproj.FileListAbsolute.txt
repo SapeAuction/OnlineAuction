@@ -248,7 +248,6 @@ D:\DevProject\OnlineAuction\AuctionWebApi\AuctionWebApi\bin\EntityFramework.xml
 D:\DevProject\OnlineAuction\AuctionWebApi\AuctionWebApi\obj\Debug\AuctionWebApi.csprojResolveAssemblyReference.cache
 D:\DevProject\OnlineAuction\AuctionWebApi\AuctionWebApi\obj\Debug\AuctionWebApi.dll
 D:\DevProject\OnlineAuction\AuctionWebApi\AuctionWebApi\obj\Debug\AuctionWebApi.pdb
-D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\obj\Debug\AuctionWebApi.csprojResolveAssemblyReference.cache
 D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\bin\roslyn\csc.exe
 D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -309,5 +308,6 @@ D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\bin\System.Web.WebPage
 D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\bin\Antlr3.Runtime.pdb
 D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\bin\Auction.WebApi.DataModel.pdb
 D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\bin\EntityFramework.xml
+D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\obj\Debug\AuctionWebApi.csprojResolveAssemblyReference.cache
 D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\obj\Debug\AuctionWebApi.dll
 D:\Tesco\GitHub\OnlineAuction\AuctionWebApi\AuctionWebApi\obj\Debug\AuctionWebApi.pdb

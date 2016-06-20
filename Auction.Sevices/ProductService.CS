@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 
+
 namespace Auction.UI.Sevices
 {
     public class ProductService : IProductService
@@ -17,7 +18,22 @@ namespace Auction.UI.Sevices
 
         public int CreateProduct(Product productEntity)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:58167/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //  HttpResponseMessage responseMessage = await client.GetAsync(url);
+                HttpResponseMessage responseMessage = client.GetAsync("api/product/1").Result;
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                    _Prod = JsonConvert.DeserializeObject<Product>(responseData);
+                }
+            }
+            return _Prod;
         }
 
         public bool DeleteProduct(int productId)

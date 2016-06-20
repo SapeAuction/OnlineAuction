@@ -170,7 +170,6 @@ D:\DevProject\OnlineAuction\OnlineAuction\bin\Newtonsoft.Json.xml
 D:\DevProject\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.UI.csprojResolveAssemblyReference.cache
 D:\DevProject\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.dll
 D:\DevProject\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.pdb
-D:\Tesco\GitHub\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.UI.csprojResolveAssemblyReference.cache
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\ApplicationInsights.config
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\roslyn\csc.exe
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -213,6 +212,7 @@ D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.Owin.Security.Microsof
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.Owin.Security.OAuth.dll
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.Owin.Security.Twitter.dll
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.Web.Infrastructure.dll
+D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Newtonsoft.Json.dll
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Owin.dll
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\System.Web.Helpers.dll
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\System.Web.Mvc.dll
@@ -222,7 +222,6 @@ D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\System.Web.WebPages.Deployment.d
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\System.Web.WebPages.dll
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\System.Web.WebPages.Razor.dll
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\WebGrease.dll
-D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Newtonsoft.Json.dll
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Auction.Entity.pdb
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Auction.Sevices.pdb
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.AI.DependencyCollector.xml
@@ -231,6 +230,7 @@ D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.AI.Web.xml
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.AI.WindowsServer.xml
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.ApplicationInsights.xml
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Newtonsoft.Json.xml
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\System.Web.Helpers.xml
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\System.Web.Mvc.xml
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\System.Web.Optimization.xml
@@ -253,6 +253,6 @@ D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.Owin.Security.OAuth.xm
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.Owin.Security.Google.xml
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\Newtonsoft.Json.xml
+D:\Tesco\GitHub\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.UI.csprojResolveAssemblyReference.cache
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.dll
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.pdb

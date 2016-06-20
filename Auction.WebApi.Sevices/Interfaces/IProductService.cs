@@ -9,7 +9,7 @@ namespace Auction.WebApi.Sevices.Interfaces
 {
     public interface IProductService
     {
-        User GetProductById(int productId);
+        Product GetProductById(int productId);
         IEnumerable<Product> GetAllProducts();
         int CreateProduct(Product productEntity);
         bool UpdateUProduct(int usproductId, Product productEntity);

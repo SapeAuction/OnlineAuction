@@ -118,7 +118,6 @@ D:\DevProject\OnlineAuction\OnlineAuction.Tests\bin\Debug\Microsoft.Owin.Host.Sy
 D:\DevProject\OnlineAuction\OnlineAuction.Tests\obj\Debug\OnlineAuction.Tests.csprojResolveAssemblyReference.cache
 D:\DevProject\OnlineAuction\OnlineAuction.Tests\obj\Debug\OnlineAuction.Tests.dll
 D:\DevProject\OnlineAuction\OnlineAuction.Tests\obj\Debug\OnlineAuction.Tests.pdb
-D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\obj\Debug\OnlineAuction.Tests.csprojResolveAssemblyReference.cache
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\bin\Debug\ApplicationInsights.config
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\bin\Debug\roslyn\csc.exe
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\bin\Debug\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -177,5 +176,6 @@ D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\bin\Debug\Auction.Sevices.pdb
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\bin\Debug\Auction.Entity.pdb
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\bin\Debug\EntityFramework.xml
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
+D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\obj\Debug\OnlineAuction.Tests.csprojResolveAssemblyReference.cache
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\obj\Debug\OnlineAuction.Tests.dll
 D:\Tesco\GitHub\OnlineAuction\OnlineAuction.Tests\obj\Debug\OnlineAuction.Tests.pdb

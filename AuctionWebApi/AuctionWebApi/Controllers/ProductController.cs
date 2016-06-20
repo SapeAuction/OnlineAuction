@@ -24,9 +24,9 @@ namespace AuctionWebApi.Controllers
         }
 
         // GET: api/Product/5
-        public string Get(int id)
+        public Product Get(int id)
         {
-            return "value";
+            return _repository.GetProductById(id);
         }
 
         // POST: api/Product
