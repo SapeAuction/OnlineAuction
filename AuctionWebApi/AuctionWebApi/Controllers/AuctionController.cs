@@ -6,13 +6,19 @@ using System.Net.Http;
 using System.Web.Http;
 using Auction.WebApi.Sevices.Interfaces;
 using Auction.Entity;
+using log4net;
 
 namespace AuctionWebApi.Controllers
 {
     public class AuctionController : ApiController
     {
+        private static readonly ILog logger = LogManager.GetLogger(typeof(string));
         private IAuctionService _repository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuctionController"/> class.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
         public AuctionController(IAuctionService repository)
         {
             _repository = repository;
@@ -21,9 +27,18 @@ namespace AuctionWebApi.Controllers
         // GET: api/Auction
         public IEnumerable<AuctionInformation> Get()
         {
+            logger.Debug("api/Auction");
             return _repository.GetAllAuctionInformation();
         }
 
+
+        [HttpGet]
+        [Route("api/Auction/GetbyID/{id}")]
+        public IEnumerable<AuctionInformation> GetbyID(int id)
+        {
+            return _repository.GetAllAuctionInformationByID(id);
+        }
+      
         // GET: api/Auction/5
         public AuctionInformation Get(int id)
         {

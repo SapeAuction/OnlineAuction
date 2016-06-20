@@ -54,3 +54,17 @@ D:\DevProject\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\EntityFramework.xml
 D:\DevProject\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.csprojResolveAssemblyReference.cache
 D:\DevProject\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.dll
 D:\DevProject\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.pdb
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.WebApi.Sevices.dll.config
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.WebApi.Sevices.dll
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.WebApi.Sevices.pdb
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.Entity.dll
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.WebApi.DataModel.dll
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\EntityFramework.dll
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.WebApi.DataModel.pdb
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.Entity.pdb
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\EntityFramework.xml
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.csprojResolveAssemblyReference.cache
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.dll
+D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.pdb

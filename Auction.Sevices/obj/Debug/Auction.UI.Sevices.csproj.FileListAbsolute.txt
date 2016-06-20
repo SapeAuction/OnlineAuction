@@ -16,3 +16,12 @@ D:\DevProject\OnlineAuction\Auction.Sevices\bin\Debug\Newtonsoft.Json.xml
 D:\DevProject\OnlineAuction\Auction.Sevices\obj\Debug\Auction.UI.Sevices.csprojResolveAssemblyReference.cache
 D:\DevProject\OnlineAuction\Auction.Sevices\obj\Debug\Auction.Sevices.dll
 D:\DevProject\OnlineAuction\Auction.Sevices\obj\Debug\Auction.Sevices.pdb
+D:\Projects\GitHub\OnlineAuction\Auction.Sevices\bin\Debug\Auction.Sevices.dll
+D:\Projects\GitHub\OnlineAuction\Auction.Sevices\bin\Debug\Auction.Sevices.pdb
+D:\Projects\GitHub\OnlineAuction\Auction.Sevices\bin\Debug\Auction.Entity.dll
+D:\Projects\GitHub\OnlineAuction\Auction.Sevices\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\GitHub\OnlineAuction\Auction.Sevices\bin\Debug\Auction.Entity.pdb
+D:\Projects\GitHub\OnlineAuction\Auction.Sevices\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\GitHub\OnlineAuction\Auction.Sevices\obj\Debug\Auction.UI.Sevices.csprojResolveAssemblyReference.cache
+D:\Projects\GitHub\OnlineAuction\Auction.Sevices\obj\Debug\Auction.Sevices.dll
+D:\Projects\GitHub\OnlineAuction\Auction.Sevices\obj\Debug\Auction.Sevices.pdb

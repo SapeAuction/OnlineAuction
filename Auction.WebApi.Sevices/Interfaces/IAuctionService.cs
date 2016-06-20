@@ -12,6 +12,7 @@ namespace Auction.WebApi.Sevices.Interfaces
     {
         AuctionInformation GetAuctionInformationById(int userId);
         IEnumerable<AuctionInformation> GetAllAuctionInformation();
+        IEnumerable<AuctionInformation> GetAllAuctionInformationByID(int id);
         bool CreateAuctionInformation(AuctionInformation auctionInformationEntity);
         bool UpdateAuctionInformation(AuctionInformation userEntity);
         bool DeleteAuctionInformation(int id);
