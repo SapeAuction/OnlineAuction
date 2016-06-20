@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Auction.WebApi.Sevices.Interfaces;
 using Auction.Entity;
+using System.Web.Http.Description;
 
 namespace AuctionWebApi.Controllers
 {
@@ -31,8 +32,17 @@ namespace AuctionWebApi.Controllers
         }
 
         // POST: api/Bid
-        public void Post([FromBody]string value)
+        [ResponseType(typeof(BidParticipantInformation))]
+        public IHttpActionResult Post(BidParticipantInformation bidParticipantInformation)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _repository.CreateBidParticipantInformation(bidParticipantInformation);
+
+            return CreatedAtRoute("DefaultApi", new { id = bidParticipantInformation.BidParticipantInformationId }, bidParticipantInformation);
         }
 
         // PUT: api/Bid/5
@@ -41,8 +51,12 @@ namespace AuctionWebApi.Controllers
         }
 
         // DELETE: api/Bid/5
-        public void Delete(int id)
+        [ResponseType(typeof(BidParticipantInformation))]
+        public IHttpActionResult Delete(int id)
         {
+            _repository.DeleteBidParticipantInformation(new BidParticipantInformation { BidParticipantInformationId = id });
+
+            return Ok();
         }
     }
 }
