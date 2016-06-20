@@ -4,11 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Auction.Entity;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
 
-namespace Auction.Sevices
+namespace Auction.UI.Sevices
 {
     public class ProductService : IProductService
     {
+        private List<Auction.Entity.Product> _ProdList;
+        private Product _Prod;
+
         public int CreateProduct(Product productEntity)
         {
             throw new NotImplementedException();
@@ -19,14 +25,44 @@ namespace Auction.Sevices
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public Auction.Entity.Product GetProductById(int productId)
         {
-            throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:58167/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //  HttpResponseMessage responseMessage = await client.GetAsync(url);
+                HttpResponseMessage responseMessage = client.GetAsync("api/product/1").Result;
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                    _Prod = JsonConvert.DeserializeObject<Product>(responseData);
+                }
+            }
+            return _Prod;
         }
 
-        public User GetProductById(int productId)
-        {
-            throw new NotImplementedException();
+        public IEnumerable<Product> GetAllProducts()
+        {            
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:58167/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //  HttpResponseMessage responseMessage = await client.GetAsync(url);
+                HttpResponseMessage responseMessage = client.GetAsync("api/product").Result;
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                    _ProdList = JsonConvert.DeserializeObject<List<Product>>(responseData);
+                }
+            }
+            return _ProdList;
         }
 
         public bool UpdateUProduct(int usproductId, Product productEntity)

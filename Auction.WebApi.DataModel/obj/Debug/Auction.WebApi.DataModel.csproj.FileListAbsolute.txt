@@ -48,3 +48,5 @@ D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.DataModel\bin\Debug\Auction.Entity.
 D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.DataModel\obj\Debug\Auction.WebApi.DataModel.csprojResolveAssemblyReference.cache
 D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.DataModel\obj\Debug\Auction.WebApi.DataModel.dll
 D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.DataModel\obj\Debug\Auction.WebApi.DataModel.pdb
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.DataModel\bin\Debug\Newtonsoft.Json.dll
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.DataModel\bin\Debug\Newtonsoft.Json.xml

@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json;
 
 
-namespace Auction.Sevices
+namespace Auction.UI.Sevices
 {
     public class BidService : IBidService
     {

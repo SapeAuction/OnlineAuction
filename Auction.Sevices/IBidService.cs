@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Auction.Entity;
 
-namespace Auction.Sevices
+namespace Auction.UI.Sevices
 {
 
     //Buyer

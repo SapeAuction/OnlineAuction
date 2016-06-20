@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Auction.Sevices;
+using Auction.UI.Sevices;
 using Auction.Entity;
 
 namespace OnlineAuction.Controllers

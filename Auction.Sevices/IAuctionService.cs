@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auction.Sevices
+namespace Auction.UI.Sevices
 {
     //Seller or sells
     public interface IAuctionService
