@@ -27,20 +27,35 @@ namespace AuctionWebApi.Controllers
         // GET: api/Auction/5
         public AuctionInformation Get(int id)
         {
-
             return _repository.GetAuctionInformationById(id);
         }
 
         // POST: api/Auction
         public HttpResponseMessage Post([FromBody]AuctionInformation value)
         {
-            _repository.UpdateAuctionInformation(value);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            
+            if (_repository.CreateAuctionInformation(value))
+            {
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.ExpectationFailed);
+            }
         }
 
         // PUT: api/Auction/5
-        public void Put(int id, [FromBody]string value)
+        public HttpResponseMessage Put([FromBody]AuctionInformation value)
         {
+
+            if (_repository.UpdateAuctionInformation(value))
+            {
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            else
+            {
+                return new HttpResponseMessage(HttpStatusCode.ExpectationFailed);
+            }
 
         }
 

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Auction.Entity.AuctionInformation>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" border="0">
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedByUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidStartDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidEndDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BidBasePrice)
+        </th>
+        <th></th>
+    </tr>*@
+
+@foreach (var item in Model) {    
+    <tr>
+        <td>
+            <img height="100" width="100" src="http://ppc.org/wp-content/uploads/2016/02/2-Tips-To-Help-Manage-Ad-Bidding-in-PPC.jpg" />
+            <br />
+            From : @Html.DisplayFor(modelItem => item.BidStartDateTime)
+            <br />
+            To :   @Html.DisplayFor(modelItem => item.BidEndDateTime)
+        </td>
+        <td>
+            <div style="font-size:xx-large;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:black;font-weight:700">
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
+            </div>
+            <br />
+                @Html.DisplayFor(modelItem => item.Product.ProductDescription)
+            <br />
+            <i>Bid Base Price</i> : INR @Html.DisplayFor(modelItem => item.BidBasePrice)
+            <br />
+            <i>New Bid Price</i> : INR <input type="text" alt="decimal value" maxlength="10" title="newBidValue" id="newbidvalue" tooltip="Enter decimal bid amount"/>
+            @Html.ActionLink(
+                                "Bid",                                       // linkText
+                                "Index",                                    // actionName
+                                "Bid",                                      // controllerName
+                                new
+                                {   // routeValues
+                                    ProductID = item.ProductId,
+                                    BidPrice = item.BidBasePrice,
+                                    AuctionInformationId = item.AuctionInformationId,
+                                    CreatedByUserId = item.CreatedByUserId
+                                },
+                                null // htmlAttributes
+                            ) 
+            <br />
+            <div id="ValidationMessage" style="font-family:'Times New Roman', Times, serif;color:rosybrown;font-size:medium;">
+                <i>Validation messages displayed here</i>
+            </div>
+        </td>
+    </tr>    
+}
+
+</table>

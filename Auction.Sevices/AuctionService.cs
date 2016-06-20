@@ -4,32 +4,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Auction.Entity;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using Auction.UI.Sevices;
 
-namespace Auction.UI.Sevices
+namespace Auction.Sevices
 {
     public class AuctionService : IAuctionService
     {
-        int IAuctionService.CreateAuctionInformation(AuctionInformation auctionInformationEntity)
+
+        private List<Auction.Entity.AuctionInformation> _auctionInformationList;
+        public int CreateAuctionInformation(AuctionInformation auctionInformationEntity)
         {
             throw new NotImplementedException();
         }
 
-        bool IAuctionService.DeleteAuctionInformation(AuctionInformation userEntity)
+        public bool DeleteAuctionInformation(AuctionInformation userEntity)
         {
             throw new NotImplementedException();
         }
 
-        IEnumerable<AuctionInformation> IAuctionService.GetAllAuctionInformation()
+        public IEnumerable<AuctionInformation> GetAllAuctionInformation()
+        {
+
+            using (var client = new HttpClient())
+
+            {
+                client.BaseAddress = new Uri("http://localhost:58167/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                //  HttpResponseMessage responseMessage = await client.GetAsync(url);
+                HttpResponseMessage responseMessage = client.GetAsync("/api/Auction").Result;
+
+                if (responseMessage.IsSuccessStatusCode)
+
+                {
+                    var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                    _auctionInformationList = JsonConvert.DeserializeObject<List<AuctionInformation>>(responseData);
+                }
+            }
+            return _auctionInformationList;
+
+            throw new NotImplementedException();
+        }
+
+        public AuctionInformation GetAuctionInformationById(int userId)
         {
             throw new NotImplementedException();
         }
 
-        AuctionInformation IAuctionService.GetAuctionInformationById(int userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        bool IAuctionService.UpdateAuctionInformation(AuctionInformation userEntity)
+        public bool UpdateAuctionInformation(AuctionInformation userEntity)
         {
             throw new NotImplementedException();
         }

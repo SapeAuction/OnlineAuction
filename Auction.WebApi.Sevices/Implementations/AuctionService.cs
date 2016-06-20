@@ -15,9 +15,19 @@ namespace Auction.WebApi.Sevices.Implementations
 
         private AuctionDBEntities db = new AuctionDBEntities();
 
-        public int CreateAuctionInformation(AuctionInformation auctionInformationEntity)
+        public bool CreateAuctionInformation(AuctionInformation auctionInformationEntity)
         {
-            throw new NotImplementedException();
+            try
+            {
+               db.AuctionInformations.Add(auctionInformationEntity);
+               db.SaveChanges();
+                 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
         }
 
         public bool DeleteAuctionInformation(int id)
@@ -29,7 +39,7 @@ namespace Auction.WebApi.Sevices.Implementations
                                                  where auc.AuctionInformationId == id
                                                  select auc).FirstOrDefault();
 
-                if (auctionObj != null)
+                if ((auctionObj != null) && (auctionObj.BidEndDateTime> DateTime.Now))
                 {
                     auctionObj.BidEndDateTime = DateTime.Now;
                     db.SaveChanges();
@@ -63,7 +73,10 @@ namespace Auction.WebApi.Sevices.Implementations
                                                      CreatedByUserId = x.auctionObj.CreatedByUserId,
                                                      ProductId = x.auctionObj.ProductId,
                                                      User = x.auctionObj.User,
-                                                     Product = new Product { ProductName = x.productObj.ProductName }
+                                                     Product = new Product { ProductName = x.productObj.ProductName,
+                                                         ProductDescription = x.productObj.ProductDescription,
+                                                         ProductImageUrl = x.productObj.ProductImageUrl
+                                                     }
 
                                                  }).OrderByDescending(t => t.BidStartDateTime).Take(20).ToList<AuctionInformation>();
 
@@ -97,7 +110,11 @@ namespace Auction.WebApi.Sevices.Implementations
                                                              CreatedByUserId = x.auctionObj.CreatedByUserId,
                                                              ProductId = x.auctionObj.ProductId,
                                                              User = x.auctionObj.User,
-                                                             Product = new Product { ProductName = x.productObj.ProductName }
+                                                             Product = new Product {
+                                                                 ProductName = x.productObj.ProductName,
+                                                                 ProductDescription = x.productObj.ProductDescription,
+                                                                 ProductImageUrl = x.productObj.ProductImageUrl
+                                                             }
                                                          }).FirstOrDefault();
 
                 return AuctionInformation;
@@ -113,21 +130,16 @@ namespace Auction.WebApi.Sevices.Implementations
 
             try
             {
-
                 AuctionInformation auctionObj = (from auc in db.AuctionInformations
                                                  where auc.AuctionInformationId == userEntity.AuctionInformationId
                                                  select auc).FirstOrDefault();
-
-                if (auctionObj != null)
+                if ((auctionObj != null)&&(auctionObj.BidStartDateTime>DateTime.Now))
                 {
-
+                    auctionObj.BidStartDateTime = userEntity.BidStartDateTime;
+                    auctionObj.BidEndDateTime = userEntity.BidEndDateTime;
                     auctionObj.BidBasePrice = userEntity.BidBasePrice;
                     auctionObj.BidDescription = userEntity.BidDescription;
-                    auctionObj.BidEndDateTime = userEntity.BidEndDateTime;
-                    auctionObj.BidParticipantInformations = userEntity.BidParticipantInformations;
-                    auctionObj.BidStartDateTime = userEntity.BidStartDateTime;
-                    auctionObj.BidEndDateTime = DateTime.Now;
-
+                    db.Entry(auctionObj).State = System.Data.EntityState.Modified;
                     db.SaveChanges();
                     return true;
                 }
@@ -138,10 +150,7 @@ namespace Auction.WebApi.Sevices.Implementations
             }
             return false;
 
-
-
-
-
         }
+
     }
 }
