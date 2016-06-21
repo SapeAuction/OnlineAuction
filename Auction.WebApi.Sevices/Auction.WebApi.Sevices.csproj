@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Auction.Entity">
-      <HintPath>..\Auction.Entity\bin\Debug\Auction.Entity.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -65,6 +62,10 @@
     <Compile Include="Implementations\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Auction.Entity\Auction.Entity.csproj">
+      <Project>{bd2ba832-bbe0-4a60-b666-8d6ef5e1376d}</Project>
+      <Name>Auction.Entity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Auction.WebApi.DataModel\Auction.WebApi.DataModel.csproj">
       <Project>{a07d77b9-831d-4025-9104-0c733ac6703d}</Project>
       <Name>Auction.WebApi.DataModel</Name>

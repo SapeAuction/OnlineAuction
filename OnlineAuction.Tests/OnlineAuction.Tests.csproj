@@ -94,7 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnlineAuction\OnlineAuction.UI.csproj">
-      <Project>{B28D53C4-571F-418D-9C22-FB12D6DAD0AA}</Project>
+      <Project>{b28d53c4-571f-418d-9c22-fb12d6dad0aa}</Project>
       <Name>OnlineAuction.UI</Name>
     </ProjectReference>
   </ItemGroup>
