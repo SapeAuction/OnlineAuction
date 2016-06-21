@@ -19,31 +19,89 @@ namespace AuctionWebApi.Controllers
         }
 
         // GET: api/User
-        public IEnumerable<User> Get()
-        {
-            return _repository.GetAllUsers();
+        [HttpGet]
+        [ActionName("GetUsers")]
+        public HttpResponseMessage Get()
+       {
+            try
+            {
+                IEnumerable<User> listUser = _repository.GetAllUsers();
+                if (listUser != null && listUser.Count() > 0)
+                    return Request.CreateResponse(HttpStatusCode.OK, listUser);
+                else
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Users not found");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
         }
 
         // GET: api/User/5
-        public string Get(int id)
+        [HttpGet]
+        [Route("api/User/Getname/{userName}")]
+        public HttpResponseMessage  Get(string userName)
         {
-            return "value";
+            try
+            {
+                User objUser = _repository.GetUserById(userName);
+                if (objUser != null)
+                    return Request.CreateResponse(HttpStatusCode.OK, objUser);
+                else
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No Users are Available");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
+
+
         // POST: api/User
-        public void Post([FromBody]string value)
+        [HttpPost]
+        [ActionName("CreateUser")]
+        public HttpResponseMessage Post([FromBody]User userEntity)
         {
+           try
+            {
+                if (userEntity != null)
+                {
+                    if (_repository.CreateUser(userEntity) > 0)
+                        return Request.CreateResponse(HttpStatusCode.OK);
+                    else
+                        return Request.CreateResponse(HttpStatusCode.NotModified);
+                }
+                else
+                return Request.CreateResponse(HttpStatusCode.NotModified);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // PUT: api/User/5
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE: api/User/5
-        public void Delete(int id)
+        [HttpDelete]
+        [ActionName("DelteUser")]
+        public HttpResponseMessage Delete(int id)
         {
+            try
+            {
+                if (_repository.DeleteUser(id))
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                else
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            catch (Exception ex)
+            { throw ex; }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Auction.UI.Sevices
 {
@@ -21,40 +22,15 @@ namespace Auction.UI.Sevices
             using (var client = new HttpClient())
 
             {
-                //JavaScriptSerializer json_serializer = new JavaScriptSerializer();               
-
-                ////http://10.209.41.40/AuctionWebApi/api/user
-                //client.BaseAddress = new Uri("http://10.209.41.40");
-                //client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                //var response = client.GetAsync("AuctionWebApi/api/User").Result;
-                //if (response.IsSuccessStatusCode)
-
-                //{
-
-                //     var uso = response.Content.ReadAsStringAsync().Result;
-                //     object  Us =  json_serializer.DeserializeObject(response.Content.ReadAsStringAsync().Result);
-                //    userobj = (Auction.Entity.User)Us;
-                //}
-
-
-                //return uso;
-              //  string url = "http://10.209.41.40/AuctionWebApi/api/user";
-
-                client.BaseAddress = new Uri("http://10.209.41.40");
+                 client.BaseAddress = new Uri("http://10.209.41.40");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //  HttpResponseMessage responseMessage = await client.GetAsync(url);
                 HttpResponseMessage responseMessage = client.GetAsync("AuctionWebApi/api/User").Result;
-
                 if (responseMessage.IsSuccessStatusCode)
-
                 {
                     var responseData = responseMessage.Content.ReadAsStringAsync().Result;
                     userobj = JsonConvert.DeserializeObject<List<User>>(responseData);
                 }
-
                 return userobj;
 
             }
@@ -62,7 +38,32 @@ namespace Auction.UI.Sevices
 
         public int CreateUser(User userEntity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                int result = default(int);
+                using (var client = new HttpClient())
+                {                  
+                    string resourceAddress = "http://localhost:58167/api/user";
+                    if (userEntity != null)
+                    {
+                        string postBody = JsonConvert.SerializeObject(userEntity);
+                        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage wcfResponse = client.PostAsync(resourceAddress, new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
+                        if (wcfResponse.IsSuccessStatusCode)
+                           result = 1;
+                    }
+                    return result;
+                }
+
+
+
+                }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+            
         }
 
         public bool DeleteUser(int userId)
@@ -93,14 +94,48 @@ namespace Auction.UI.Sevices
                 return userobj;
         }
 
-        public User GetUserById(int userId)
+        public User GetUserById(string userName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Auction.Entity.User objusr = new User();
+                using (var client = new HttpClient())
+                {
+                    //http://localhost:58167/api/User/Getname/''dddd'
+                    client.BaseAddress = new Uri("http://localhost:58167");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    //  HttpResponseMessage responseMessage = await client.GetAsync(url);
+                    HttpResponseMessage responseMessage = client.GetAsync("/api/User/Getname//" + userName).Result;
+
+                    if (responseMessage.IsSuccessStatusCode)
+
+                    {
+                        var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                        objusr = JsonConvert.DeserializeObject<User>(responseData);
+                        
+                    }
+                    else
+                    {
+                        objusr = null;
+                    }
+
+                    return objusr;
+                }
+               
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         public bool UpdateUser(int userId, User userEntity)
         {
             throw new NotImplementedException();
         }
+
     }
 }

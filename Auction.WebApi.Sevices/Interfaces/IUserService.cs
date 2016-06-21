@@ -9,7 +9,7 @@ namespace Auction.WebApi.Sevices.Interfaces
 {
     public interface IUserService
     {
-        User GetUserById(int userId);
+        User GetUserById(string  userName);
         IEnumerable<User> GetAllUsers();
         int CreateUser(User userEntity);
         bool UpdateUser(int userId, User userEntity);

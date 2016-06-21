@@ -170,8 +170,6 @@ D:\DevProject\OnlineAuction\OnlineAuction\bin\Newtonsoft.Json.xml
 D:\DevProject\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.UI.csprojResolveAssemblyReference.cache
 D:\DevProject\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.dll
 D:\DevProject\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.pdb
-D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\roslyn\Microsoft.CodeAnalysis.dll
-D:\Tesco\GitHub\OnlineAuction\OnlineAuction\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\Projects\GitHub\OnlineAuction\OnlineAuction\bin\ApplicationInsights.config
 D:\Projects\GitHub\OnlineAuction\OnlineAuction\bin\roslyn\csc.exe
 D:\Projects\GitHub\OnlineAuction\OnlineAuction\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll

@@ -15,33 +15,116 @@ namespace Auction.WebApi.Sevices.Implementations
 
         public int CreateUser(User userEntity)
         {
-            throw new NotImplementedException();
+            db.Configuration.ProxyCreationEnabled = false;
+            try
+            {
+                int createdStatus = default(int);
+                if(userEntity!=null)
+                { 
+                db.Users.Add(userEntity);
+                createdStatus = db.SaveChanges();                
+                }
+                return createdStatus;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception();
+            }
         }
 
-        public bool DeleteUser(int userId)
+        public bool DeleteUser(int userEntityId)
         {
-            throw new NotImplementedException();
+            db.Configuration.ProxyCreationEnabled = false;
+            try
+            {
+                bool deletStatus = default(bool);
+                //Ned to featch all USer 
+                var user = (from u in db.Users
+                            where u.UserId == userEntityId select u).FirstOrDefault<User>();
+                if(user!=null)
+                { 
+                    db.Users.Remove(user);
+                    int createdStatus = db.SaveChanges();
+                    deletStatus = true;
+                }
+
+                return deletStatus;
+            }
+            catch
+            {
+                throw new Exception();
+            }
+           
         }
 
         public IEnumerable<User> GetAllUsers()
         {
             db.Configuration.ProxyCreationEnabled = false;
-
-            //var BidParticipantDetails = (from u in db.BidParticipantInformations
-            //                             select u).ToList<BidParticipantInformation>();
-            var users = (from u in db.Users
-                         select u).ToList<User>();
-            return users;
+            try
+            {
+                //var BidParticipantDetails = (from u in db.BidParticipantInformations
+                //                             select u).ToList<BidParticipantInformation>();
+                var users = (from u in db.Users
+                             select u).ToList<User>();
+                return users;
+            }
+            catch
+            {
+                throw new Exception();
+            }
+        }
+        
+        public User GetUserById(string userName)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            try
+            {
+                //var BidParticipantDetails = (from u in db.BidParticipantInformations
+                //                             select u).ToList<BidParticipantInformation>();
+                var users = (from u in db.Users
+                             where u.UserName== userName
+                             select u).FirstOrDefault<User>();
+                return users;
+            }
+            catch
+            {
+                throw new Exception();
+            }
         }
 
-        public User GetUserById(int userId)
+        public bool UpdateUser( int uid,User userUpdatedEntity)
         {
-            throw new NotImplementedException();
-        }
+            db.Configuration.ProxyCreationEnabled = false;
+            try
+            {
+                bool updatedStastus = default(bool);
+                int userIdToModify = default(int);
+                if (userUpdatedEntity != null)
+                {
+                    if (uid >0 )
+                        userIdToModify = (from u in db.Users
+                                          select userUpdatedEntity).FirstOrDefault<User>().UserId;
+                    else
+                        userIdToModify = uid;
 
-        public bool UpdateUser(int userId, User userEntity)
-        {
-            throw new NotImplementedException();
+                    //Finding out User object from DB
+                    User objUser = (from u in db.Users
+                                    where u.UserId == userIdToModify
+                                    select u).FirstOrDefault<User>();
+                    objUser.UserName = userUpdatedEntity.UserName;
+                    objUser.Address = userUpdatedEntity.Address;
+                    objUser.Status = userUpdatedEntity.Status;
+                    objUser.Password = userUpdatedEntity.Password;
+                    db.SaveChanges();
+                    //db.Database.ExecuteSqlCommand()
+                    updatedStastus = true;
+                }
+                return updatedStastus;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }        
     }
 }

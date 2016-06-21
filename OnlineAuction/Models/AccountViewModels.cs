@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Auction.Entity;
 
 namespace OnlineAuction.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
@@ -43,13 +47,17 @@ namespace OnlineAuction.Models
     {
         [Required]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string UserName { get; set; }
     }
 
     public class LoginViewModel
     {
+
+      
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
+
         [EmailAddress]
         public string Email { get; set; }
 
@@ -64,10 +72,15 @@ namespace OnlineAuction.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required]        
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -79,11 +92,21 @@ namespace OnlineAuction.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]        
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+                        
+        //[Display(Name = "CreatedDate")]
+        public System.DateTime CreatedDate = System.DateTime.UtcNow;//{ get; set; }
     }
 
     public class ResetPasswordViewModel
     {
         [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -105,6 +128,9 @@ namespace OnlineAuction.Models
     public class ForgotPasswordViewModel
     {
         [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Auction.UI.Sevices;
 using Auction.Entity;
+using System.Web.UI.WebControls;
 
 namespace OnlineAuction.Controllers
 {
@@ -12,7 +13,12 @@ namespace OnlineAuction.Controllers
     {
         public ActionResult Index()
         {
-
+            if (TempData["LoginDetails"] != null)
+            {
+                String userName = TempData["LoginDetails"].ToString();
+                TempData["LoginDetails"] = userName;
+            }
+//    this.HttpContext.Response.Cookies.Add
             return View();
         }
 
@@ -25,7 +31,7 @@ namespace OnlineAuction.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Online Auction Support Team.";
 
             return View();
         }
@@ -34,8 +40,11 @@ namespace OnlineAuction.Controllers
         {
             IBidService bidService = new BidService();
             IEnumerable<BidParticipantInformation> lstBids = bidService.GetAllBidParticipantInformation();
-
             return View(lstBids);
+        }
+        public ActionResult GetAllUsers()
+        {
+            return View();
         }
     }
 }
