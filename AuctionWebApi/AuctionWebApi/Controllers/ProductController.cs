@@ -38,10 +38,10 @@ namespace AuctionWebApi.Controllers
             }
             else
             {
-               int status = _repository.CreateProduct(inputEntity);
-                if (status > 0)
+                int productId = _repository.CreateProduct(inputEntity);
+                if (productId > 0)
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, "Product created YAYYAY");
+                    return Request.CreateResponse(HttpStatusCode.OK, productId);
                 }
             }
 

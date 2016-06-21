@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using Auction.Sevices;
 using Auction.Entity;
 using Auction.UI.Sevices;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace OnlineAuction.Controllers
 {
@@ -13,11 +17,13 @@ namespace OnlineAuction.Controllers
     {
 
         private Auction.Sevices.AuctionService _auctionService = new AuctionService();
-       
+
         // GET: Auction
         public ActionResult Index()
         {
-           IEnumerable<AuctionInformation> _auctionInformationList = _auctionService.GetAllAuctionInformation();
+           
+
+            IEnumerable<AuctionInformation> _auctionInformationList = _auctionService.GetAllAuctionInformation();
             return View(_auctionInformationList);
         }
 
@@ -29,18 +35,35 @@ namespace OnlineAuction.Controllers
 
         // GET: Auction/Create
         public ActionResult Create()
+
         {
+            IList<SelectListItem> productListType = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "California", Value = "1"},
+                new SelectListItem{Text = "Alaska", Value = "2"},
+                new SelectListItem{Text = "Illinois", Value = "3"},
+                new SelectListItem{Text = "Texas", Value = "4"},
+                new SelectListItem{Text = "Washington", Value = "5"}
+
+            };
+            ViewBag.typeList = productListType;
+
+
             return View();
         }
 
         // POST: Auction/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(AuctionInformation collection)
         {
             try
             {
-                // TODO: Add insert logic here
+                ProductService _productService = new ProductService();
 
+                int productID = _productService.CreateProduct(collection.Product);
+                collection.ProductId = productID;
+                collection.CreatedByUserId = 1;
+                _auctionService.CreateAuctionInformation(collection);
                 return RedirectToAction("Index");
             }
             catch
@@ -92,5 +115,39 @@ namespace OnlineAuction.Controllers
                 return View();
             }
         }
+
+        public ActionResult PlaceBid(String productID, String bidPrice, String auctionInfoId, String userID)
+        {
+            bidPrice = "23.80";
+            auctionInfoId = "1";
+            userID = "1";
+
+            BidParticipantInformation placeBidInfo = new BidParticipantInformation
+            {
+                UserId = Convert.ToInt32(userID),
+                AuctionInformationId = Convert.ToInt32(auctionInfoId),
+                BidPrice = Convert.ToDecimal(bidPrice),
+                BidCreationDateTime = DateTime.Now,
+                AuctionInformation = null
+            };
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:58167");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                string postBody = JsonConvert.SerializeObject(placeBidInfo);
+                HttpResponseMessage apiResponse = client.PostAsync("api/Bid", new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
+
+                if (apiResponse.IsSuccessStatusCode)
+                {
+                    //int newBidId = Convert.ToInt32(apiResponse.Content.ReadAsStringAsync().Result);
+                }
+            }
+
+            return RedirectToAction("Index", "Auction");
+        }
+
     }
 }

@@ -17,17 +17,21 @@ namespace Auction.WebApi.Sevices.Implementations
 
         public bool CreateAuctionInformation(AuctionInformation auctionInformationEntity)
         {
+            //auctionInformationEntity.Product = null;
+
+
             try
             {
-               db.AuctionInformations.Add(auctionInformationEntity);
-               db.SaveChanges();
-                 
+                auctionInformationEntity.Product = null;
+                db.AuctionInformations.Add(auctionInformationEntity);
+                db.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return false;
+
         }
 
         public bool DeleteAuctionInformation(int id)
@@ -39,7 +43,7 @@ namespace Auction.WebApi.Sevices.Implementations
                                                  where auc.AuctionInformationId == id
                                                  select auc).FirstOrDefault();
 
-                if ((auctionObj != null) && (auctionObj.BidEndDateTime> DateTime.Now))
+                if ((auctionObj != null) && (auctionObj.BidEndDateTime > DateTime.Now))
                 {
                     auctionObj.BidEndDateTime = DateTime.Now;
                     db.SaveChanges();
@@ -73,7 +77,9 @@ namespace Auction.WebApi.Sevices.Implementations
                                                      CreatedByUserId = x.auctionObj.CreatedByUserId,
                                                      ProductId = x.auctionObj.ProductId,
                                                      User = x.auctionObj.User,
-                                                     Product = new Product { ProductName = x.productObj.ProductName,
+                                                     Product = new Product
+                                                     {
+                                                         ProductName = x.productObj.ProductName,
                                                          ProductDescription = x.productObj.ProductDescription,
                                                          ProductImageUrl = x.productObj.ProductImageUrl
                                                      }
@@ -89,7 +95,7 @@ namespace Auction.WebApi.Sevices.Implementations
 
         }
 
-    
+
         public IEnumerable<AuctionInformation> GetAllAuctionInformationByID(int id)
         {
 
@@ -99,7 +105,7 @@ namespace Auction.WebApi.Sevices.Implementations
                 var AuctionInformationDetails = (from auctionObj in db.AuctionInformations
                                                  join productObj in db.Products
                                                  on auctionObj.ProductId equals productObj.ProductId
-                                                 where auctionObj.CreatedByUserId==id
+                                                 where auctionObj.CreatedByUserId == id
                                                  select new { auctionObj, productObj }).ToList().Select(x => new AuctionInformation
                                                  {
                                                      AuctionInformationId = x.auctionObj.AuctionInformationId,
@@ -150,7 +156,8 @@ namespace Auction.WebApi.Sevices.Implementations
                                                              CreatedByUserId = x.auctionObj.CreatedByUserId,
                                                              ProductId = x.auctionObj.ProductId,
                                                              User = x.auctionObj.User,
-                                                             Product = new Product {
+                                                             Product = new Product
+                                                             {
                                                                  ProductName = x.productObj.ProductName,
                                                                  ProductDescription = x.productObj.ProductDescription,
                                                                  ProductImageUrl = x.productObj.ProductImageUrl
@@ -173,7 +180,7 @@ namespace Auction.WebApi.Sevices.Implementations
                 AuctionInformation auctionObj = (from auc in db.AuctionInformations
                                                  where auc.AuctionInformationId == userEntity.AuctionInformationId
                                                  select auc).FirstOrDefault();
-                if ((auctionObj != null)&&(auctionObj.BidStartDateTime>DateTime.Now))
+                if ((auctionObj != null) && (auctionObj.BidStartDateTime > DateTime.Now))
                 {
                     auctionObj.BidStartDateTime = userEntity.BidStartDateTime;
                     auctionObj.BidEndDateTime = userEntity.BidEndDateTime;

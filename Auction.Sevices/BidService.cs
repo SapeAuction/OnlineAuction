@@ -74,6 +74,11 @@ namespace Auction.UI.Sevices
             throw new NotImplementedException();
         }
 
+        public float MaxBidPrice(int ProductId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool UpdateBidParticipantInformation(BidParticipantInformation userEntity)
         {
             throw new NotImplementedException();

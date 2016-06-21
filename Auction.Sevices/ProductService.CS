@@ -18,22 +18,28 @@ namespace Auction.UI.Sevices
 
         public int CreateProduct(Product productEntity)
         {
-            using (var client = new HttpClient())
+            try
             {
-                //client.BaseAddress = new Uri("http://localhost:58167/");
-                //client.DefaultRequestHeaders.Accept.Clear();
-                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                int result = default(int);
+                using (var client = new HttpClient())
+                {
+                    string resourceAddress = "http://localhost:58167/api/product";
+                    if (productEntity != null)
+                    {
+                        string postBody = JsonConvert.SerializeObject(productEntity);
+                        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage wcfResponse = client.PostAsync(resourceAddress, new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
+                        result = Convert.ToInt32(wcfResponse.Content.ReadAsStringAsync().Result);
 
-                ////  HttpResponseMessage responseMessage = await client.GetAsync(url);
-                //HttpResponseMessage responseMessage = client.GetAsync("api/product/1").Result;
-
-                //if (responseMessage.IsSuccessStatusCode)
-                //{
-                //    var responseData = responseMessage.Content.ReadAsStringAsync().Result;
-                //    _Prod = JsonConvert.DeserializeObject<Product>(responseData);
-                //}
+                    }
+                    return result;
+                }
             }
-            return 1;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         public bool DeleteProduct(int productId)

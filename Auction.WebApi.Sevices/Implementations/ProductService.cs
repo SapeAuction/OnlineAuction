@@ -17,17 +17,19 @@ namespace Auction.WebApi.Sevices.Implementations
         public int CreateProduct(Product productEntity)
         {
             db.Configuration.ProxyCreationEnabled = false;
-            int createdStatus = default(int);
             try
             {
-                if(db.Products.Add(productEntity)!=null)
-                    createdStatus = db.SaveChanges();
+                if (db.Products.Add(productEntity) != null)
+                    db.SaveChanges();
+
+
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return createdStatus;
+            return productEntity.ProductId;
         }
 
         public bool DeleteProduct(int productId)

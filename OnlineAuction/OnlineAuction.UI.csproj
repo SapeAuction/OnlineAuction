@@ -204,6 +204,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ImageHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -216,6 +217,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="ProductsImages\Ballpoint_Pen_DS.jpg" />
+    <Content Include="ProductsImages\CheckImage.jpg" />
+    <Content Include="ProductsImages\DellLaptopUp.png" />
+    <Content Include="ProductsImages\inspiron-15-7000-series-gaming-laptop-169x149.jpg" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -272,6 +277,7 @@
     <Content Include="Views\Home\BidInfo.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Auction\Index.cshtml" />
+    <Content Include="Views\Auction\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,10 @@ namespace Auction.Entity
         public int AuctionInformationId { get; set; }
         public int ProductId { get; set; }
         public int CreatedByUserId { get; set; }
+
+        [DataType(DataType.Date)]
         public System.DateTime BidStartDateTime { get; set; }
+        [DataType(DataType.Date)]
         public System.DateTime BidEndDateTime { get; set; }
         public string BidDescription { get; set; }
         public decimal BidBasePrice { get; set; }

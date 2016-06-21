@@ -16,5 +16,7 @@ namespace Auction.UI.Sevices
         int CreateBidParticipantInformation(BidParticipantInformation bidParticipantInformationEntity);
         bool UpdateBidParticipantInformation(BidParticipantInformation userEntity);
         bool DeleteBidParticipantInformation(BidParticipantInformation bidParticipantInformationEntity);
+
+        float MaxBidPrice(int ProductId);
     }
 }

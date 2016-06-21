@@ -68,3 +68,17 @@ D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Newtonsoft.Jso
 D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.csprojResolveAssemblyReference.cache
 D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.dll
 D:\Projects\GitHub\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.pdb
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.WebApi.Sevices.dll.config
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.WebApi.Sevices.dll
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.WebApi.Sevices.pdb
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.Entity.dll
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.WebApi.DataModel.dll
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\EntityFramework.dll
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Newtonsoft.Json.dll
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.WebApi.DataModel.pdb
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Auction.Entity.pdb
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\EntityFramework.xml
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\bin\Debug\Newtonsoft.Json.xml
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.csprojResolveAssemblyReference.cache
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.dll
+D:\Tesco\GitHub\OnlineAuction\Auction.WebApi.Sevices\obj\Debug\Auction.WebApi.Sevices.pdb

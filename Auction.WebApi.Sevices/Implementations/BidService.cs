@@ -95,6 +95,29 @@ namespace Auction.WebApi.Sevices.Implementations
             return isSuccess;
         }
 
+        public float MaxBidPrice(int ProductId)
+        {
+            //            SELECT MAX(BidParticipantInformation.BidPrice)
+            //FROM         AuctionInformation INNER JOIN
+            //                      BidParticipantInformation ON AuctionInformation.AuctionInformationId = BidParticipantInformation.AuctionInformationId
+
+            //                      where AuctionInformation.ProductId = 1
+            var q = (from bp in db.BidParticipantInformations
+                     join ai in db.AuctionInformations on bp.AuctionInformationId equals ai.AuctionInformationId
+                     //select bp.BidPrice
+                     select new
+                     {
+                         bp.BidPrice
+                     }
+                     //into bidPrice
+                     //let maxActiveDate = bidPrice.Max(x => x.ActiveDate)
+            );
+
+            return 123;
+
+            //throw new NotImplementedException();
+        }
+
 
     }
 }

@@ -15,9 +15,33 @@ namespace Auction.Sevices
     {
 
         private List<Auction.Entity.AuctionInformation> _auctionInformationList;
+       
         public int CreateAuctionInformation(AuctionInformation auctionInformationEntity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                int result = default(int);
+                using (var client = new HttpClient())
+                {
+                    string resourceAddress = "http://localhost:58167/api/auction";
+                    if (auctionInformationEntity != null)
+                    {
+                        string postBody = JsonConvert.SerializeObject(auctionInformationEntity);
+                        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage wcfResponse = client.PostAsync(resourceAddress, new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
+                        if (wcfResponse.IsSuccessStatusCode)
+                            result = 1;
+                    }
+                    return result;
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool DeleteAuctionInformation(AuctionInformation userEntity)
