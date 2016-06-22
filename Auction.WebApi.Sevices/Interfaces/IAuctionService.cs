@@ -11,7 +11,7 @@ namespace Auction.WebApi.Sevices.Interfaces
     public interface IAuctionService
     {
         AuctionInformation GetAuctionInformationById(int userId);
-        IEnumerable<AuctionInformation> GetAllAuctionInformation();
+        IEnumerable<SP_GetMaxBidUserDetails_Result> GetAllAuctionInformation();
         IEnumerable<AuctionInformation> GetAllAuctionInformationByID(int id);
         bool CreateAuctionInformation(AuctionInformation auctionInformationEntity);
         bool UpdateAuctionInformation(AuctionInformation userEntity);

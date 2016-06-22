@@ -1,77 +1,19 @@
-﻿@model IEnumerable<Auction.Entity.AuctionInformation>
+﻿@using Auction.Entity
+@model IEnumerable<Auction.Entity.SP_GetMaxBidUserDetails_Result>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 
-<script src="~/Scripts/jquery-1.10.2.js"></script>
 <h2>Active Auctions</h2>
 
 <p>
     @Html.ActionLink("Register Products", "Create")
 </p>
-<table class="table" border="0">
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.HiddenFor(modelItem => item.AuctionInformationId)
-                @Html.Image(@item.Product.ProductImageUrl, "", "125")
-                <br />
-                <b>From :</b> @Html.DisplayFor(modelItem => item.BidStartDateTime)
-                <br />
-                <b>To :</b>   @Html.DisplayFor(modelItem => item.BidEndDateTime)
-            </td>
-            <td>
-                <div style="font-size:xx-large;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:black;font-weight:700">
-                   
-                    @Html.DisplayFor(modelItem => item.Product.ProductName)
-                </div>
-                @*@if (ViewContext.HttpContext.User.Identity.IsAuthenticated == true)
-                {
-                    
-                }*@               
 
-                @Html.ActionLink("View", "View", new { productId = item.ProductId })
-                |
-                @Html.ActionLink("Edit", "Edit", new {Id = item.AuctionInformationId })
-                |
-                @Html.ActionLink("Deactivate", "Deactivate", new { productId = item.ProductId })
-
-                <br />
-
-                <b>Description:</b>@Html.DisplayFor(modelItem => item.Product.ProductDescription)
-                <br />
-                <b>
-                    Bid Base Price
-                </b> : INR @Html.DisplayFor(modelItem => item.BidBasePrice)
-                <br />
-                <b>New Bid Price</b> : INR <input type="text" alt="decimal value" maxlength="10" title="newBidValue" id="newbidvalue" tooltip="Enter decimal bid amount" />
-               
-                 
-                 
-                 @Html.ActionLink(
-                                "BID",                                       // linkText
-                                "PlaceBid",                                    // actionName
-                                "Auction",                                      // controllerName
-                                new
-                                {   // routeValues
-                                    ProductID = item.ProductId,
-                                    BidPrice = "jjj",
-                                    AuctionInformationId = item.AuctionInformationId,
-                                    CreatedByUserId = item.CreatedByUserId
-                                },
-                                null // htmlAttributes
-                            )
-                <br />
-                <div id="ValidationMessage" style="font-family:'Times New Roman', Times, serif;color:rosybrown;font-size:medium;">
-                    <i>Validation messages displayed here</i>
-                </div>
-            </td>
-        </tr>
-    }
-</table>
-
+@foreach (var item in Model)
+{
+    @Html.Partial("_ProductPartial", item)
+}

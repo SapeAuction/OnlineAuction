@@ -21,8 +21,7 @@ namespace OnlineAuction.Controllers
         // GET: Auction
         public ActionResult Index()
         {
-           
-            IEnumerable<AuctionInformation> _auctionInformationList = _auctionService.GetAllAuctionInformation();
+            IEnumerable<SP_GetMaxBidUserDetails_Result> _auctionInformationList = _auctionService.GetCurrentSales();
             return View(_auctionInformationList);
         }
 
@@ -137,17 +136,14 @@ namespace OnlineAuction.Controllers
             }
         }
 
-        public ActionResult PlaceBid(String productID, String bidPrice, String auctionInfoId, String userID)
+        [HttpPost]
+        public ActionResult PlaceBid(FormCollection bidCollection, String AuctionInformationId, String UserId)
         {
-            bidPrice = "23.80";
-            auctionInfoId = "1";
-            userID = "1";
-
             BidParticipantInformation placeBidInfo = new BidParticipantInformation
             {
-                UserId = Convert.ToInt32(userID),
-                AuctionInformationId = Convert.ToInt32(auctionInfoId),
-                BidPrice = Convert.ToDecimal(bidPrice),
+                UserId = Convert.ToInt32(UserId),
+                AuctionInformationId = Convert.ToInt32(AuctionInformationId),
+                BidPrice = Convert.ToDecimal(bidCollection["newBidPrice"]),
                 BidCreationDateTime = DateTime.Now,
                 AuctionInformation = null
             };

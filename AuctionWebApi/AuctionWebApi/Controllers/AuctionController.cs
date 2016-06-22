@@ -25,7 +25,7 @@ namespace AuctionWebApi.Controllers
         }
 
         // GET: api/Auction
-        public IEnumerable<AuctionInformation> Get()
+        public IEnumerable<SP_GetMaxBidUserDetails_Result> Get()
         {
             logger.Debug("api/Auction");
             return _repository.GetAllAuctionInformation();

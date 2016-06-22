@@ -12,6 +12,9 @@ namespace Auction.WebApi.DataModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     using Auction.Entity;
     
     public partial class AuctionDBEntities : DbContext
@@ -31,5 +34,10 @@ namespace Auction.WebApi.DataModel
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<User> Users { get; set; }
+    
+        public virtual ObjectResult<SP_GetMaxBidUserDetails_Result> SP_GetMaxBidUserDetails()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetMaxBidUserDetails_Result>("SP_GetMaxBidUserDetails");
+        }
     }
 }

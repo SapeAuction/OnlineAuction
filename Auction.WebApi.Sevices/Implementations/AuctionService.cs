@@ -57,42 +57,45 @@ namespace Auction.WebApi.Sevices.Implementations
             return false;
         }
 
-        public IEnumerable<AuctionInformation> GetAllAuctionInformation()
+        public IEnumerable<SP_GetMaxBidUserDetails_Result> GetAllAuctionInformation()
         {
+            IEnumerable<SP_GetMaxBidUserDetails_Result> salesDetails = null;
 
             try
             {
                 db.Configuration.ProxyCreationEnabled = false;
-                var AuctionInformationDetails = (from auctionObj in db.AuctionInformations
-                                                 join productObj in db.Products
-                                                 on auctionObj.ProductId equals productObj.ProductId
-                                                 select new { auctionObj, productObj }).ToList().Select(x => new AuctionInformation
-                                                 {
-                                                     AuctionInformationId = x.auctionObj.AuctionInformationId,
-                                                     BidBasePrice = x.auctionObj.BidBasePrice,
-                                                     BidDescription = x.auctionObj.BidDescription,
-                                                     BidEndDateTime = x.auctionObj.BidEndDateTime,
-                                                     BidParticipantInformations = x.auctionObj.BidParticipantInformations,
-                                                     BidStartDateTime = x.auctionObj.BidStartDateTime,
-                                                     CreatedByUserId = x.auctionObj.CreatedByUserId,
-                                                     ProductId = x.auctionObj.ProductId,
-                                                     User = x.auctionObj.User,
-                                                     Product = new Product
-                                                     {
-                                                         ProductName = x.productObj.ProductName,
-                                                         ProductDescription = x.productObj.ProductDescription,
-                                                         ProductImageUrl = x.productObj.ProductImageUrl
-                                                     }
 
-                                                 }).OrderByDescending(t => t.BidStartDateTime).Take(20).ToList<AuctionInformation>();
+                salesDetails = db.SP_GetMaxBidUserDetails().AsEnumerable<SP_GetMaxBidUserDetails_Result>();
 
-                return AuctionInformationDetails;
+                //var AuctionInformationDetails = (from auctionObj in db.AuctionInformations
+                //                                 join productObj in db.Products
+                //                                 on auctionObj.ProductId equals productObj.ProductId
+                //                                 select new { auctionObj, productObj }).ToList().Select(x => new AuctionInformation
+                //                                 {
+                //                                     AuctionInformationId = x.auctionObj.AuctionInformationId,
+                //                                     BidBasePrice = x.auctionObj.BidBasePrice,
+                //                                     BidDescription = x.auctionObj.BidDescription,
+                //                                     BidEndDateTime = x.auctionObj.BidEndDateTime,
+                //                                     BidParticipantInformations = x.auctionObj.BidParticipantInformations,
+                //                                     BidStartDateTime = x.auctionObj.BidStartDateTime,
+                //                                     CreatedByUserId = x.auctionObj.CreatedByUserId,
+                //                                     ProductId = x.auctionObj.ProductId,
+                //                                     User = x.auctionObj.User,
+                //                                     Product = new Product
+                //                                     {
+                //                                         ProductName = x.productObj.ProductName,
+                //                                         ProductDescription = x.productObj.ProductDescription,
+                //                                         ProductImageUrl = x.productObj.ProductImageUrl
+                //                                     }
+
+                //                                 }).OrderByDescending(t => t.BidStartDateTime).Take(20).ToList<AuctionInformation>();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
+            return salesDetails;
         }
 
 

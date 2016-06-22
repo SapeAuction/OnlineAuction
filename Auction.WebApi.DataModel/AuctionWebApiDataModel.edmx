@@ -116,6 +116,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_GetMaxBidUserDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="AuctionDBModelStoreContainer">
           <EntitySet Name="AuctionInformation" EntityType="Self.AuctionInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BidParticipantInformation" EntityType="Self.BidParticipantInformation" Schema="dbo" store:Type="Tables" />
@@ -294,7 +295,22 @@
             <End Role="ProductType" EntitySet="ProductTypes" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <FunctionImport Name="SP_GetMaxBidUserDetails" ReturnType="Collection(AuctionDBModel.SP_GetMaxBidUserDetails_Result)" />
         </EntityContainer>
+        <ComplexType Name="SP_GetMaxBidUserDetails_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="AuctionInformationId" Nullable="true" />
+          <Property Type="Int32" Name="ProductId" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="30" />
+          <Property Type="DateTime" Name="BidCreationDateTime" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="BidStartDateTime" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="BidEndDateTime" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="MaxBidPrice" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="BidBasePrice" Nullable="true" Precision="19" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProductImageUrl" Nullable="true" />
+          <Property Type="String" Name="ProductDescription" Nullable="true" MaxLength="512" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -357,6 +373,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetMaxBidUserDetails" FunctionName="AuctionDBModel.Store.SP_GetMaxBidUserDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AuctionDBModel.SP_GetMaxBidUserDetails_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AuctionInformationId" ColumnName="AuctionInformationId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="BidCreationDateTime" ColumnName="BidCreationDateTime" />
+                <ScalarProperty Name="BidStartDateTime" ColumnName="BidStartDateTime" />
+                <ScalarProperty Name="BidEndDateTime" ColumnName="BidEndDateTime" />
+                <ScalarProperty Name="MaxBidPrice" ColumnName="MaxBidPrice" />
+                <ScalarProperty Name="BidBasePrice" ColumnName="BidBasePrice" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductImageUrl" ColumnName="ProductImageUrl" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
