@@ -71,17 +71,62 @@ namespace Auction.Sevices
             }
             return _auctionInformationList;
 
-            throw new NotImplementedException();
+            
         }
 
         public AuctionInformation GetAuctionInformationById(int userId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                AuctionInformation _auctionInformation = null;
+                using (var client = new HttpClient())
+
+                {
+                    client.BaseAddress = new Uri("http://localhost:58167/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    //  HttpResponseMessage responseMessage = await client.GetAsync(url);
+                    HttpResponseMessage responseMessage = client.GetAsync("/api/Auction/" + userId).Result;
+
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                        _auctionInformation = JsonConvert.DeserializeObject<AuctionInformation>(responseData);
+                    }
+                }
+                return _auctionInformation;
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
         }
 
-        public bool UpdateAuctionInformation(AuctionInformation userEntity)
+        public bool UpdateAuctionInformation(int id,AuctionInformation userEntity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string resourceAddress = "http://localhost:58167/api/auction/"+id;
+                    if (userEntity != null)
+                    {
+                        string postBody = JsonConvert.SerializeObject(userEntity);
+                        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage wcfResponse = client.PutAsync(resourceAddress, new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
+                        if (wcfResponse.IsSuccessStatusCode)
+                        {
+                        }
+                    }
+                   
+                }
+                return true; 
+            }
+            catch
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

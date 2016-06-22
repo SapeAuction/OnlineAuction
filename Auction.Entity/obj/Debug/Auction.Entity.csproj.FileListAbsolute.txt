@@ -40,3 +40,10 @@ D:\Tesco\GitHub\OnlineAuction\Auction.Entity\bin\Debug\Newtonsoft.Json.dll
 D:\Tesco\GitHub\OnlineAuction\Auction.Entity\bin\Debug\Newtonsoft.Json.xml
 D:\Tesco\GitHub\OnlineAuction\Auction.Entity\obj\Debug\Auction.Entity.dll
 D:\Tesco\GitHub\OnlineAuction\Auction.Entity\obj\Debug\Auction.Entity.pdb
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Entity\bin\Debug\Auction.Entity.dll
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Entity\bin\Debug\Auction.Entity.pdb
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Entity\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Entity\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Entity\obj\Debug\Auction.Entity.csprojResolveAssemblyReference.cache
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Entity\obj\Debug\Auction.Entity.dll
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Entity\obj\Debug\Auction.Entity.pdb

@@ -41,6 +41,7 @@ namespace AuctionWebApi.Controllers
       
         // GET: api/Auction/5
         public AuctionInformation Get(int id)
+
         {
             return _repository.GetAuctionInformationById(id);
         }
@@ -60,7 +61,7 @@ namespace AuctionWebApi.Controllers
         }
 
         // PUT: api/Auction/5
-        public HttpResponseMessage Put([FromBody]AuctionInformation value)
+        public HttpResponseMessage Put(int id,[FromBody]AuctionInformation value)
         {
 
             if (_repository.UpdateAuctionInformation(value))

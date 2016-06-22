@@ -89,7 +89,28 @@ namespace Auction.UI.Sevices
 
         public bool UpdateUProduct(int usproductId, Product productEntity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                int result = default(int);
+                using (var client = new HttpClient())
+                {
+                    string resourceAddress = "http://localhost:58167/api/product";
+                    if (productEntity != null)
+                    {
+                        string postBody = JsonConvert.SerializeObject(productEntity);
+                        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                        HttpResponseMessage wcfResponse = client.PostAsync(resourceAddress, new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
+                        result = Convert.ToInt32(wcfResponse.Content.ReadAsStringAsync().Result);
+
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

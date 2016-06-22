@@ -3,8 +3,10 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
+<script src="~/Scripts/jquery-1.10.2.js"></script>
 <h2>Active Auctions</h2>
 
 <p>
@@ -16,6 +18,7 @@
     {
         <tr>
             <td>
+                @Html.HiddenFor(modelItem => item.AuctionInformationId)
                 @Html.Image(@item.Product.ProductImageUrl, "", "125")
                 <br />
                 <b>From :</b> @Html.DisplayFor(modelItem => item.BidStartDateTime)
@@ -34,7 +37,7 @@
 
                 @Html.ActionLink("View", "View", new { productId = item.ProductId })
                 |
-                @Html.ActionLink("Edit", "Edit", new { productId = item.ProductId })
+                @Html.ActionLink("Edit", "Edit", new {Id = item.AuctionInformationId })
                 |
                 @Html.ActionLink("Deactivate", "Deactivate", new { productId = item.ProductId })
 
@@ -47,14 +50,17 @@
                 </b> : INR @Html.DisplayFor(modelItem => item.BidBasePrice)
                 <br />
                 <b>New Bid Price</b> : INR <input type="text" alt="decimal value" maxlength="10" title="newBidValue" id="newbidvalue" tooltip="Enter decimal bid amount" />
-                @Html.ActionLink(
+               
+                 
+                 
+                 @Html.ActionLink(
                                 "BID",                                       // linkText
                                 "PlaceBid",                                    // actionName
                                 "Auction",                                      // controllerName
                                 new
                                 {   // routeValues
                                     ProductID = item.ProductId,
-                                    BidPrice = item.BidBasePrice,
+                                    BidPrice = "jjj",
                                     AuctionInformationId = item.AuctionInformationId,
                                     CreatedByUserId = item.CreatedByUserId
                                 },
@@ -68,3 +74,4 @@
         </tr>
     }
 </table>
+

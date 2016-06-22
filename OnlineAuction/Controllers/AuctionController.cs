@@ -22,7 +22,6 @@ namespace OnlineAuction.Controllers
         public ActionResult Index()
         {
            
-
             IEnumerable<AuctionInformation> _auctionInformationList = _auctionService.GetAllAuctionInformation();
             return View(_auctionInformationList);
         }
@@ -39,12 +38,11 @@ namespace OnlineAuction.Controllers
         {
             IList<SelectListItem> productListType = new List<SelectListItem>
             {
-                new SelectListItem{Text = "California", Value = "1"},
-                new SelectListItem{Text = "Alaska", Value = "2"},
-                new SelectListItem{Text = "Illinois", Value = "3"},
-                new SelectListItem{Text = "Texas", Value = "4"},
-                new SelectListItem{Text = "Washington", Value = "5"}
-
+                new SelectListItem{Text = "Electronics", Value = "1"},
+                new SelectListItem{Text = "Clothing", Value = "2"},
+                new SelectListItem{Text = "Spotrs", Value = "3"},
+                new SelectListItem{Text = "Furniture", Value = "4"},
+              
             };
             ViewBag.typeList = productListType;
 
@@ -75,17 +73,41 @@ namespace OnlineAuction.Controllers
         // GET: Auction/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+
+            IList<SelectListItem> productListType = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "Electronics", Value = "1"},
+                new SelectListItem{Text = "Clothing", Value = "2"},
+                new SelectListItem{Text = "Spotrs", Value = "3"},
+                new SelectListItem{Text = "Furniture", Value = "4"},
+            };
+
+           
+            AuctionInformation _auctionInformation = _auctionService.GetAuctionInformationById(id);
+
+            foreach (SelectListItem test in productListType)
+            {
+                if (test.Value.Equals(_auctionInformation.Product.ProductTypeId.ToString()))
+                {
+                    test.Selected = true;
+                }
+            }
+
+            ViewBag.typeList = productListType;
+            return View(_auctionInformation);
+
         }
 
         // POST: Auction/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, AuctionInformation collection)
         {
             try
             {
-                // TODO: Add update logic here
-
+                collection.CreatedByUserId = 1;
+                collection.BidStartDateTime = DateTime.Now;
+                collection.BidEndDateTime = DateTime.Now;
+                _auctionService.UpdateAuctionInformation(id,collection);
                 return RedirectToAction("Index");
             }
             catch
@@ -107,7 +129,6 @@ namespace OnlineAuction.Controllers
             try
             {
                 // TODO: Add delete logic here
-
                 return RedirectToAction("Index");
             }
             catch
