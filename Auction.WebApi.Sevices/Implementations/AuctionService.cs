@@ -121,7 +121,9 @@ namespace Auction.WebApi.Sevices.Implementations
                                                      {
                                                          ProductName = x.productObj.ProductName,
                                                          ProductDescription = x.productObj.ProductDescription,
-                                                         ProductImageUrl = x.productObj.ProductImageUrl
+                                                         ProductImageUrl = x.productObj.ProductImageUrl,
+                                                         ProductType=x.productObj.ProductType,
+                                                         ProductTypeId=x.productObj.ProductTypeId                                                      
                                                      }
 
                                                  }).OrderByDescending(t => t.BidStartDateTime).Take(20).ToList<AuctionInformation>();
@@ -160,10 +162,10 @@ namespace Auction.WebApi.Sevices.Implementations
                                                              {
                                                                  ProductName = x.productObj.ProductName,
                                                                  ProductDescription = x.productObj.ProductDescription,
-                                                                 ProductImageUrl = x.productObj.ProductImageUrl
+                                                                 ProductImageUrl = x.productObj.ProductImageUrl,
+                                                                 ProductTypeId=x.productObj.ProductTypeId
                                                              }
                                                          }).FirstOrDefault();
-
                 return AuctionInformation;
             }
             catch (Exception ex)
@@ -180,8 +182,10 @@ namespace Auction.WebApi.Sevices.Implementations
                 AuctionInformation auctionObj = (from auc in db.AuctionInformations
                                                  where auc.AuctionInformationId == userEntity.AuctionInformationId
                                                  select auc).FirstOrDefault();
-                if ((auctionObj != null) && (auctionObj.BidStartDateTime > DateTime.Now))
+                if (auctionObj != null)
                 {
+                   auctionObj.Product = userEntity.Product;
+                    auctionObj.ProductId = userEntity.ProductId;
                     auctionObj.BidStartDateTime = userEntity.BidStartDateTime;
                     auctionObj.BidEndDateTime = userEntity.BidEndDateTime;
                     auctionObj.BidBasePrice = userEntity.BidBasePrice;

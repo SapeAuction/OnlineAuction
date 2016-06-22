@@ -13,7 +13,7 @@ namespace Auction.UI.Sevices
         AuctionInformation GetAuctionInformationById(int userId);
         IEnumerable<AuctionInformation> GetAllAuctionInformation();
         int CreateAuctionInformation(AuctionInformation auctionInformationEntity);
-        bool UpdateAuctionInformation(AuctionInformation userEntity);
+        bool UpdateAuctionInformation(int id,AuctionInformation userEntity);
         bool DeleteAuctionInformation(AuctionInformation userEntity);
     }
 }
