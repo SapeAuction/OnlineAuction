@@ -52,6 +52,7 @@
     <Compile Include="ProductType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Roles.cs" />
+    <Compile Include="SP_GetMaxBidUserDetails_Result.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UsersInRole.cs" />
   </ItemGroup>

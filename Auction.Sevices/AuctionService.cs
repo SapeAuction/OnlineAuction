@@ -74,6 +74,30 @@ namespace Auction.Sevices
             
         }
 
+        public IEnumerable<SP_GetMaxBidUserDetails_Result> GetCurrentSales()
+        {
+            IEnumerable<SP_GetMaxBidUserDetails_Result> salesDetails = new List<SP_GetMaxBidUserDetails_Result>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:58167/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage responseMessage = client.GetAsync("/api/Auction").Result;
+
+                if (responseMessage.IsSuccessStatusCode)
+
+                {
+                    var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                    salesDetails = JsonConvert.DeserializeObject<IEnumerable<SP_GetMaxBidUserDetails_Result>>(responseData);
+                }
+            }
+
+            return salesDetails;
+
+        }
+
         public AuctionInformation GetAuctionInformationById(int userId)
         {
             try
