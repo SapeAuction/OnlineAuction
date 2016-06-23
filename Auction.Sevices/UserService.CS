@@ -137,5 +137,39 @@ namespace Auction.UI.Sevices
             throw new NotImplementedException();
         }
 
+        public User IsValidUser(string userName, string userPassword)
+        {
+            try
+            {
+                Auction.Entity.User objusr = new User();
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:58167");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    HttpResponseMessage responseMessage = client.GetAsync("/api/User/IsValidUser/" + userName + "/" + userPassword).Result;
+
+                    if (responseMessage.IsSuccessStatusCode)
+
+                    {
+                        var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                        objusr = JsonConvert.DeserializeObject<User>(responseData);
+
+                    }
+                    else
+                    {
+                        objusr = null;
+                    }
+
+                    return objusr;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

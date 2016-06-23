@@ -103,5 +103,24 @@ namespace AuctionWebApi.Controllers
             catch (Exception ex)
             { throw ex; }
         }
+
+        // GET: api/User/5
+        [HttpGet]
+        [Route("api/User/IsValidUser/{userName}/{userPassword}")]
+        public HttpResponseMessage IsValidUser(string userName, string userPassword)
+        {
+            try
+            {
+                User objUser = _repository.IsValidUser(userName, userPassword);
+                if (objUser != null)
+                    return Request.CreateResponse(HttpStatusCode.OK, objUser);
+                else
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No Users are Available");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
