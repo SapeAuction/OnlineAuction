@@ -92,6 +92,22 @@ namespace Auction.WebApi.Sevices.Implementations
             }
         }
 
+        public User IsValidUser(string userName, string userPassword)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            try
+            {
+                var validUser = (from u in db.Users
+                                 where (u.UserName == userName && u.Password == userPassword)
+                                 select u).FirstOrDefault<User>();
+                return validUser;
+            }
+            catch
+            {
+                throw new Exception();
+            }
+        }
+
         public bool UpdateUser( int uid,User userUpdatedEntity)
         {
             db.Configuration.ProxyCreationEnabled = false;

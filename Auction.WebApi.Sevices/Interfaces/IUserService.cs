@@ -14,5 +14,6 @@ namespace Auction.WebApi.Sevices.Interfaces
         int CreateUser(User userEntity);
         bool UpdateUser(int userId, User userEntity);
         bool DeleteUser(int userId);
+        User IsValidUser(string userName, string userPassword);
     }
 }

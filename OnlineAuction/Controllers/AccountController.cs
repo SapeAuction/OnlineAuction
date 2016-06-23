@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using OnlineAuction.Models;
 using Auction.UI.Sevices;
+using System.Web.Security;
 
 namespace OnlineAuction.Controllers
 {
@@ -25,7 +26,7 @@ namespace OnlineAuction.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -37,9 +38,9 @@ namespace OnlineAuction.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -69,37 +70,75 @@ namespace OnlineAuction.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(Auction.Entity.User model, string returnUrl)
         {
-            try
-            { 
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-                string userName = model.UserName;
-                IUserService userService = new UserService();
-                var resu = userService.GetUserById(userName);         
 
-                if (resu != null)
-                {   //Landing Page URL
-                    TempData["LoginDetails"] = "Hi "+ resu.UserName;
-                    return RedirectToAction("Index","Auction");
-                    //return RedirectToLocal(returnUrl);
+            if (ModelState.IsValid)
+            {
+                IUserService userService = new UserService();
+                var result = userService.IsValidUser(model.UserName, model.Password);
+                if (result != null)
+                {
+                    FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
+                     1,
+                     model.UserName.ToString(),
+                     DateTime.Now,
+                     DateTime.Now.AddMinutes(15),
+                     true, //pass here true, if you want to implement remember me functionality
+                     model.UserName.ToString());
+
+                    string encTicket = FormsAuthentication.Encrypt(authTicket);
+                    HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
+                    Response.Cookies.Add(faCookie);
+
+                    Session["userName"] = result.UserName;
+                    Session["userId"] = result.UserId;
+
+                    return RedirectToAction("Index", "Auction");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    ModelState.AddModelError("", "Incorrect username and/or password");
                 }
-
             }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-            
+            return View(model);
         }
+        ////
+        //// POST: /Account/Login
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Login(LoginViewModel model, string returnUrl)
+        //{
+        //    try
+        //    { 
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return View(model);
+        //        }
+        //        string userName = model.UserName;
+        //        IUserService userService = new UserService();
+        //        var resu = userService.GetUserById(userName);         
+
+        //        if (resu != null)
+        //        {   //Landing Page URL
+        //            TempData["LoginDetails"] = "Hi "+ resu.UserName;
+        //            return RedirectToAction("Index","Auction");
+        //            //return RedirectToLocal(returnUrl);
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "Invalid login attempt.");
+        //            return View(model);
+        //        }
+
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+
+        //}
 
         //
         // GET: /Account/VerifyCode
@@ -130,7 +169,7 @@ namespace OnlineAuction.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -152,7 +191,7 @@ namespace OnlineAuction.Controllers
             return View();
         }
 
-        
+
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -168,9 +207,9 @@ namespace OnlineAuction.Controllers
 
             int resu = _objUserService.CreateUser(objus1);
 
-            if (resu==1)
-            { 
-            return RedirectToAction("Index", "Home");
+            if (resu == 1)
+            {
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -180,7 +219,7 @@ namespace OnlineAuction.Controllers
 
         }
 
-       
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
