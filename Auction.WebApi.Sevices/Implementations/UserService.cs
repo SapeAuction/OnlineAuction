@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 using Auction.Entity;
 using Auction.WebApi.DataModel;
 using Auction.WebApi.Sevices.Interfaces;
+using log4net;
 
 namespace Auction.WebApi.Sevices.Implementations
 {
     public class UserService : IUserService
     {
+        private static readonly ILog logger = LogManager.GetLogger(typeof(string));
         private AuctionDBEntities db = new AuctionDBEntities();
 
+        /// <summary>
+        /// Creates the user.
+        /// </summary>
+        /// <param name="userEntity">The user entity.</param>
+        /// <returns></returns>
         public int CreateUser(User userEntity)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -26,12 +33,18 @@ namespace Auction.WebApi.Sevices.Implementations
                 }
                 return createdStatus;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                logger.Error(ex.Message);
+                throw ex;
             }
         }
 
+        /// <summary>
+        /// Deletes the user.
+        /// </summary>
+        /// <param name="userEntityId">The user entity identifier.</param>
+        /// <returns></returns>
         public bool DeleteUser(int userEntityId)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -50,13 +63,18 @@ namespace Auction.WebApi.Sevices.Implementations
 
                 return deletStatus;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                logger.Error(ex.Message);
+                throw ex;
             }
-           
+
         }
 
+        /// <summary>
+        /// Gets all users.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<User> GetAllUsers()
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -66,9 +84,10 @@ namespace Auction.WebApi.Sevices.Implementations
                              select u).ToList<User>();
                 return users;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                logger.Error(ex.Message);
+                throw ex;
             }
         }
         
@@ -82,12 +101,19 @@ namespace Auction.WebApi.Sevices.Implementations
                              select u).FirstOrDefault<User>();
                 return users;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                logger.Error(ex.Message);
+                throw ex;
             }
         }
 
+        /// <summary>
+        /// Determines whether [is valid user] [the specified user name].
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <param name="userPassword">The user password.</param>
+        /// <returns></returns>
         public User IsValidUser(string userName, string userPassword)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -98,12 +124,19 @@ namespace Auction.WebApi.Sevices.Implementations
                                  select u).FirstOrDefault<User>();
                 return validUser;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                logger.Error(ex.Message);
+                throw ex;
             }
         }
 
+        /// <summary>
+        /// Updates the user.
+        /// </summary>
+        /// <param name="uid">The uid.</param>
+        /// <param name="userUpdatedEntity">The user updated entity.</param>
+        /// <returns></returns>
         public bool UpdateUser( int uid,User userUpdatedEntity)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -133,8 +166,9 @@ namespace Auction.WebApi.Sevices.Implementations
                 }
                 return updatedStastus;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
         }        

@@ -6,11 +6,13 @@ using System.Net.Http;
 using System.Web.Http;
 using Auction.WebApi.Sevices.Interfaces;
 using Auction.Entity;
+using log4net;
 
 namespace AuctionWebApi.Controllers
 {
     public class UserController : ApiController
-    {        
+    {
+        private static readonly ILog logger = LogManager.GetLogger(typeof(string));
         private IUserService _repository;
 
         public UserController(IUserService repository)
@@ -33,6 +35,7 @@ namespace AuctionWebApi.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
 
@@ -53,6 +56,7 @@ namespace AuctionWebApi.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
         }
@@ -78,6 +82,7 @@ namespace AuctionWebApi.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
         }
@@ -101,7 +106,10 @@ namespace AuctionWebApi.Controllers
                     return Request.CreateResponse(HttpStatusCode.NotFound);
             }
             catch (Exception ex)
-            { throw ex; }
+            {
+                logger.Error(ex.Message);
+                throw ex;
+            }
         }
 
         // GET: api/User/5
@@ -119,6 +127,7 @@ namespace AuctionWebApi.Controllers
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
         }
