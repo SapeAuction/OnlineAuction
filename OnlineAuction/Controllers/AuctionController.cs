@@ -6,6 +6,7 @@ using Auction.Entity;
 
 namespace OnlineAuction.Controllers
 {
+    [Authorize]
     public class AuctionController : Controller
     {
 
