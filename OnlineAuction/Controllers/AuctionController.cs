@@ -13,6 +13,7 @@ using System.Text;
 
 namespace OnlineAuction.Controllers
 {
+    [Authorize]
     public class AuctionController : Controller
     {
 
