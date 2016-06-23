@@ -71,6 +71,10 @@
       <Project>{E7E07EA7-72E6-4886-8966-F500ACCFCEE1}</Project>
       <Name>Auction.WebApi.Sevices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AuctionWebApi\AuctionWebApi\AuctionWebApi.csproj">
+      <Project>{c1d24827-452a-42f9-9553-7f3d8a502f9d}</Project>
+      <Name>AuctionWebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
