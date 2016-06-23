@@ -439,8 +439,13 @@ namespace OnlineAuction.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            string[] myCookies = Request.Cookies.AllKeys;
+            foreach (string cookie in myCookies)
+            {
+                Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+            }
+            return RedirectToAction("Login", "Account");
         }
 
         //

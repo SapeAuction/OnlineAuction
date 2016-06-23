@@ -41,7 +41,6 @@ namespace AuctionWebApi.Controllers
       
         // GET: api/Auction/5
         public AuctionInformation Get(int id)
-
         {
             return _repository.GetAuctionInformationById(id);
         }
