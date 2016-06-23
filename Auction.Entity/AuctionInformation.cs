@@ -18,11 +18,17 @@ namespace Auction.Entity
         public int ProductId { get; set; }
         public int CreatedByUserId { get; set; }
 
+        [Required(ErrorMessage = "The Start Date field is required.")]
         [DataType(DataType.Date)]
         public System.DateTime BidStartDateTime { get; set; }
         [DataType(DataType.Date)]
+
+        [Required(ErrorMessage = "The End Date field is required.")]
         public System.DateTime BidEndDateTime { get; set; }
+
         public string BidDescription { get; set; }
+
+        [Required(ErrorMessage = "The Base Price field is required.")]
         public decimal BidBasePrice { get; set; }
 
         public virtual Product Product { get; set; }

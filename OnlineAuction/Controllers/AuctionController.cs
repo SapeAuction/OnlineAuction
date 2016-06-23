@@ -41,7 +41,7 @@ namespace OnlineAuction.Controllers
                 new SelectListItem{Text = "Clothing", Value = "2"},
                 new SelectListItem{Text = "Spotrs", Value = "3"},
                 new SelectListItem{Text = "Furniture", Value = "4"},
-              
+
             };
 
             ViewBag.typeList = productListType;
@@ -53,11 +53,29 @@ namespace OnlineAuction.Controllers
         [HttpPost]
         public ActionResult Create(AuctionInformation collection)
         {
+
             try
             {
-                collection.CreatedByUserId = 1;
-                _auctionService.CreateAuctionInformation(collection);
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+
+                    collection.CreatedByUserId = 1;
+                    _auctionService.CreateAuctionInformation(collection);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    IList<SelectListItem> productListType = new List<SelectListItem>
+                {
+                    new SelectListItem{Text = "Electronics", Value = "1"},
+                    new SelectListItem{Text = "Clothing", Value = "2"},
+                    new SelectListItem{Text = "Spotrs", Value = "3"},
+                    new SelectListItem{Text = "Furniture", Value = "4"},
+                };
+                    ViewBag.typeList = productListType;
+                    return View();
+                }
+
             }
             catch
             {
@@ -68,7 +86,7 @@ namespace OnlineAuction.Controllers
         // GET: Auction/Edit/5
         public ActionResult Edit(int id)
         {
-
+            AuctionInformation _auctionInformation = null;
             IList<SelectListItem> productListType = new List<SelectListItem>
             {
                 new SelectListItem{Text = "Electronics", Value = "1"},
@@ -77,19 +95,26 @@ namespace OnlineAuction.Controllers
                 new SelectListItem{Text = "Furniture", Value = "4"},
             };
 
-           
-            AuctionInformation _auctionInformation = _auctionService.GetAuctionInformationById(id);
-
-            foreach (SelectListItem test in productListType)
+            if (ModelState.IsValid)
             {
-                if (test.Value.Equals(_auctionInformation.Product.ProductTypeId.ToString()))
+                _auctionInformation = _auctionService.GetAuctionInformationById(id);
+
+                foreach (SelectListItem test in productListType)
                 {
-                    test.Selected = true;
+                    if (test.Value.Equals(_auctionInformation.Product.ProductTypeId.ToString()))
+                    {
+                        test.Selected = true;
+                    }
                 }
+                ViewBag.typeList = productListType;
+                return View(_auctionInformation);
+            }
+            else
+            {
+                return View(_auctionInformation);
             }
 
-            ViewBag.typeList = productListType;
-            return View(_auctionInformation);
+
 
         }
 
@@ -100,7 +125,7 @@ namespace OnlineAuction.Controllers
             try
             {
                 collection.CreatedByUserId = 1;
-                _auctionService.UpdateAuctionInformation(id,collection);
+                _auctionService.UpdateAuctionInformation(id, collection);
                 return RedirectToAction("Index");
             }
             catch
@@ -153,10 +178,10 @@ namespace OnlineAuction.Controllers
             return RedirectToAction("Index", "Auction");
         }
 
-       
+
         public ActionResult Deactivate(int id)
         {
-             _auctionService.DeleteAuctionInformation(id);
+            _auctionService.DeleteAuctionInformation(id);
             return RedirectToAction("Index", "Auction");
         }
 
