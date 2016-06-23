@@ -428,3 +428,7 @@ D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\OnlineAuction\bin\Microsof
 D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.UI.csprojResolveAssemblyReference.cache
 D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.dll
 D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\OnlineAuction\obj\Debug\OnlineAuction.pdb
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\OnlineAuction\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\OnlineAuction\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\OnlineAuction\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\OnlineAuction\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

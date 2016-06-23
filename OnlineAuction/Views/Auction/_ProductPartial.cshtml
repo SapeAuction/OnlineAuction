@@ -1,7 +1,10 @@
 ﻿@model Auction.Entity.SP_GetMaxBidUserDetails_Result
 
+
 @using (Html.BeginForm("PlaceBid", "Auction", new { AuctionInformationId = Model.AuctionInformationId, UserId = Model.UserId }))
 {
+    
+
     @Html.HiddenFor(i => Model.AuctionInformationId)
     @Html.HiddenFor(i => Model.UserId)
 
@@ -19,11 +22,7 @@
 
                     @Html.DisplayFor(modelItem => Model.ProductName)
                 </div>
-                @*@if (ViewContext.HttpContext.User.Identity.IsAuthenticated == true)
-                    {
-
-                   }*@
-
+              
               
                 @Html.ActionLink("Edit", "Edit", new { Id = Model.AuctionInformationId })
                 |
@@ -52,4 +51,12 @@
             </td>
         </tr>
     </table>
+
 }
+<div>
+    <div id="hitCount">
+
+    </div>
+</div>
+
+
