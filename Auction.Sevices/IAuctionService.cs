@@ -14,6 +14,7 @@ namespace Auction.UI.Sevices
         IEnumerable<AuctionInformation> GetAllAuctionInformation();
         int CreateAuctionInformation(AuctionInformation auctionInformationEntity);
         bool UpdateAuctionInformation(int id,AuctionInformation userEntity);
-        bool DeleteAuctionInformation(AuctionInformation userEntity);
+        bool DeleteAuctionInformation(int auctionId);
+        bool saveLatestBidInformation(BidParticipantInformation bidInfo);
     }
 }

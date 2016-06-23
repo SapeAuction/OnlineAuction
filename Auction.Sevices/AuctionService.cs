@@ -34,9 +34,6 @@ namespace Auction.Sevices
                     }
                     return result;
                 }
-
-
-
             }
             catch (Exception ex)
             {
@@ -44,33 +41,64 @@ namespace Auction.Sevices
             }
         }
 
-        public bool DeleteAuctionInformation(AuctionInformation userEntity)
+        public bool DeleteAuctionInformation(int auctionId)
         {
-            throw new NotImplementedException();
+            bool status = true; 
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:58167/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage responseMessage = client.DeleteAsync("/api/Auction/" + auctionId).Result;
+
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        status = true;
+                    }
+                    else
+                    {
+
+                        status = false;
+                    }
+                    return status;
+                }
+            }
+            catch
+            {
+                throw new Exception();
+            }
+            
         }
 
         public IEnumerable<AuctionInformation> GetAllAuctionInformation()
         {
-
-            using (var client = new HttpClient())
-
+            try
             {
-                client.BaseAddress = new Uri("http://localhost:58167/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                //  HttpResponseMessage responseMessage = await client.GetAsync(url);
-                HttpResponseMessage responseMessage = client.GetAsync("/api/Auction").Result;
-
-                if (responseMessage.IsSuccessStatusCode)
-
+                using (var client = new HttpClient())
                 {
-                    var responseData = responseMessage.Content.ReadAsStringAsync().Result;
-                    _auctionInformationList = JsonConvert.DeserializeObject<List<AuctionInformation>>(responseData);
-                }
-            }
-            return _auctionInformationList;
+                    client.BaseAddress = new Uri("http://localhost:58167/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    
+                    HttpResponseMessage responseMessage = client.GetAsync("/api/Auction").Result;
+
+                    if (responseMessage.IsSuccessStatusCode)
+
+                    {
+                        var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                        _auctionInformationList = JsonConvert.DeserializeObject<List<AuctionInformation>>(responseData);
+                    }
+                }
+                return _auctionInformationList;
+            }
+            catch
+            {
+                throw new Exception();
+            }
             
         }
 
@@ -78,24 +106,29 @@ namespace Auction.Sevices
         {
             IEnumerable<SP_GetMaxBidUserDetails_Result> salesDetails = new List<SP_GetMaxBidUserDetails_Result>();
 
-            using (var client = new HttpClient())
+            try
             {
-                client.BaseAddress = new Uri("http://localhost:58167/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage responseMessage = client.GetAsync("/api/Auction").Result;
-
-                if (responseMessage.IsSuccessStatusCode)
-
+                using (var client = new HttpClient())
                 {
-                    var responseData = responseMessage.Content.ReadAsStringAsync().Result;
-                    salesDetails = JsonConvert.DeserializeObject<IEnumerable<SP_GetMaxBidUserDetails_Result>>(responseData);
+                    client.BaseAddress = new Uri("http://localhost:58167/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage responseMessage = client.GetAsync("/api/Auction").Result;
+
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                        salesDetails = JsonConvert.DeserializeObject<IEnumerable<SP_GetMaxBidUserDetails_Result>>(responseData);
+                    }
                 }
+
+                return salesDetails;
             }
-
-            return salesDetails;
-
+            catch {
+                throw new Exception();
+            }
         }
 
         public AuctionInformation GetAuctionInformationById(int userId)
@@ -110,7 +143,7 @@ namespace Auction.Sevices
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    //  HttpResponseMessage responseMessage = await client.GetAsync(url);
+                   
                     HttpResponseMessage responseMessage = client.GetAsync("/api/Auction/" + userId).Result;
 
                     if (responseMessage.IsSuccessStatusCode)
@@ -150,6 +183,35 @@ namespace Auction.Sevices
             catch
             {
                 throw new NotImplementedException();
+            }
+        }
+
+        public bool saveLatestBidInformation(BidParticipantInformation bidInfo)
+        {
+            bool status = true;
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:58167");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    string postBody = JsonConvert.SerializeObject(bidInfo);
+                    HttpResponseMessage apiResponse = client.PostAsync("api/Bid", new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
+
+                    if (apiResponse.IsSuccessStatusCode)
+                    {
+                        status = true;
+                    }
+                    else { status = false; }
+                }
+                return status;
+            }
+            catch
+            {
+
+                throw new Exception();
             }
         }
     }

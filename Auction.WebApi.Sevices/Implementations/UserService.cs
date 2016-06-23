@@ -26,7 +26,7 @@ namespace Auction.WebApi.Sevices.Implementations
                 }
                 return createdStatus;
             }
-            catch(Exception ex)
+            catch
             {
                 throw new Exception();
             }
@@ -62,9 +62,7 @@ namespace Auction.WebApi.Sevices.Implementations
             db.Configuration.ProxyCreationEnabled = false;
             try
             {
-                //var BidParticipantDetails = (from u in db.BidParticipantInformations
-                //                             select u).ToList<BidParticipantInformation>();
-                var users = (from u in db.Users
+                 var users = (from u in db.Users
                              select u).ToList<User>();
                 return users;
             }
@@ -79,9 +77,7 @@ namespace Auction.WebApi.Sevices.Implementations
             db.Configuration.ProxyCreationEnabled = false;
             try
             {
-                //var BidParticipantDetails = (from u in db.BidParticipantInformations
-                //                             select u).ToList<BidParticipantInformation>();
-                var users = (from u in db.Users
+                 var users = (from u in db.Users
                              where u.UserName== userName
                              select u).FirstOrDefault<User>();
                 return users;

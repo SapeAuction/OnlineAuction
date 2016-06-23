@@ -22,12 +22,12 @@
                 @*@if (ViewContext.HttpContext.User.Identity.IsAuthenticated == true)
                     {
 
-                    }*@
+                   }*@
 
               
                 @Html.ActionLink("Edit", "Edit", new { Id = Model.AuctionInformationId })
                 |
-                @Html.ActionLink("Deactivate", "Deactivate", new { productId = Model.ProductId })
+                @Html.ActionLink("Deactivate", "Deactivate", new { Id = Model.AuctionInformationId })
 
                 <br />
 
@@ -44,18 +44,7 @@
                 <b>New Bid Price</b> : INR <input type="text" alt="decimal value" maxlength="10" title="newBidValue" name="newBidPrice" id="newBidPrice" tooltip="Enter decimal bid amount" />
 
                 <input type="submit" value="Place Bid" class="button" />
-                @*@Html.ActionLink(
-                        "BID",                                       // linkText
-                        "PlaceBid",                                    // actionName
-                        "Auction",                                      // controllerName
-                        new
-                        {   // routeValues
-                            ProductID = Model.ProductId,
-                            BidPrice = Model.BidBasePrice,
-                            AuctionInformationId = Model.AuctionInformationId
-                        },
-                        null // htmlAttributes
-                    )*@
+            
                 <br />
                 <div id="ValidationMessage" style="font-family:'Times New Roman', Times, serif;color:rosybrown;font-size:medium;">
                     <i>Validation messages displayed here</i>

@@ -42,7 +42,7 @@ namespace Auction.WebApi.Sevices.Implementations
                                                  where auc.AuctionInformationId == id
                                                  select auc).FirstOrDefault();
 
-                if ((auctionObj != null) && (auctionObj.BidEndDateTime > DateTime.Now))
+                if ((auctionObj != null))
                 {
                     auctionObj.BidEndDateTime = DateTime.Now;
                     db.SaveChanges();

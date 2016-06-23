@@ -33,7 +33,6 @@ namespace OnlineAuction.Controllers
 
         // GET: Auction/Create
         public ActionResult Create()
-
         {
             IList<SelectListItem> productListType = new List<SelectListItem>
             {
@@ -43,8 +42,8 @@ namespace OnlineAuction.Controllers
                 new SelectListItem{Text = "Furniture", Value = "4"},
               
             };
-            ViewBag.typeList = productListType;
 
+            ViewBag.typeList = productListType;
 
             return View();
         }
@@ -55,9 +54,6 @@ namespace OnlineAuction.Controllers
         {
             try
             {
-               // ProductService _productService = new ProductService();
-              //  int productID = _productService.CreateProduct(collection.Product);
-              //  collection.ProductId = productID;
                 collection.CreatedByUserId = 1;
                 _auctionService.CreateAuctionInformation(collection);
                 return RedirectToAction("Index");
@@ -145,21 +141,21 @@ namespace OnlineAuction.Controllers
                 AuctionInformation = null
             };
 
-            using (var client = new HttpClient())
+            try
             {
-                client.BaseAddress = new Uri("http://localhost:58167");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                string postBody = JsonConvert.SerializeObject(placeBidInfo);
-                HttpResponseMessage apiResponse = client.PostAsync("api/Bid", new StringContent(postBody, Encoding.UTF8, "application/json")).Result;
-
-                if (apiResponse.IsSuccessStatusCode)
-                {
-                    //int newBidId = Convert.ToInt32(apiResponse.Content.ReadAsStringAsync().Result);
-                }
+                _auctionService.saveLatestBidInformation(placeBidInfo);
             }
+            catch
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Auction");
+        }
 
+       
+        public ActionResult Deactivate(int id)
+        {
+             _auctionService.DeleteAuctionInformation(id);
             return RedirectToAction("Index", "Auction");
         }
 
