@@ -55,10 +55,9 @@ namespace OnlineAuction.Controllers
         {
             try
             {
-                ProductService _productService = new ProductService();
-
-                int productID = _productService.CreateProduct(collection.Product);
-                collection.ProductId = productID;
+               // ProductService _productService = new ProductService();
+              //  int productID = _productService.CreateProduct(collection.Product);
+              //  collection.ProductId = productID;
                 collection.CreatedByUserId = 1;
                 _auctionService.CreateAuctionInformation(collection);
                 return RedirectToAction("Index");
@@ -104,8 +103,6 @@ namespace OnlineAuction.Controllers
             try
             {
                 collection.CreatedByUserId = 1;
-                collection.BidStartDateTime = DateTime.Now;
-                collection.BidEndDateTime = DateTime.Now;
                 _auctionService.UpdateAuctionInformation(id,collection);
                 return RedirectToAction("Index");
             }

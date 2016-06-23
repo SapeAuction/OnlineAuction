@@ -17,12 +17,11 @@ namespace Auction.WebApi.Sevices.Implementations
 
         public bool CreateAuctionInformation(AuctionInformation auctionInformationEntity)
         {
-            //auctionInformationEntity.Product = null;
-
-
+            
             try
             {
-                auctionInformationEntity.Product = null;
+                auctionInformationEntity.BidStartDateTime = DateTime.Now;
+                // auctionInformationEntity.Product = null;
                 db.AuctionInformations.Add(auctionInformationEntity);
                 db.SaveChanges();
                 return true;
@@ -189,8 +188,8 @@ namespace Auction.WebApi.Sevices.Implementations
                 {
                    auctionObj.Product = userEntity.Product;
                     auctionObj.ProductId = userEntity.ProductId;
-                    auctionObj.BidStartDateTime = userEntity.BidStartDateTime;
-                    auctionObj.BidEndDateTime = userEntity.BidEndDateTime;
+                   // auctionObj.BidStartDateTime = userEntity.BidStartDateTime;
+                   // auctionObj.BidEndDateTime = userEntity.BidEndDateTime;
                     auctionObj.BidBasePrice = userEntity.BidBasePrice;
                     auctionObj.BidDescription = userEntity.BidDescription;
                     db.Entry(auctionObj).State = System.Data.EntityState.Modified;
