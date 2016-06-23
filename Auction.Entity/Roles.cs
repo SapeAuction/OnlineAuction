@@ -8,5 +8,6 @@ namespace Auction.Entity
 {
     public class Roles
     {
+
     }
 }
