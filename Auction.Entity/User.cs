@@ -32,6 +32,9 @@ namespace Auction.Entity
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
 
+        [Required]
+        public string EmailId { get; set; }
+
         public virtual ICollection<AuctionInformation> AuctionInformations { get; set; }
         public virtual ICollection<BidParticipantInformation> BidParticipantInformations { get; set; }
     }
