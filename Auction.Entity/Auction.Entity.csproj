@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AuctionInformation.cs" />
     <Compile Include="BidParticipantInformation.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

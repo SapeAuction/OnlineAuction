@@ -9,13 +9,20 @@ using System.Net.Http.Headers;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using log4net;
 
 namespace Auction.UI.Sevices
 {
     public class UserService : IUserService
     {
-        //API Call 
+        private static readonly ILog logger = LogManager.GetLogger(typeof(string));
+
         private List<Auction.Entity.User> userobj;
+
+        /// <summary>
+        /// Gets the users.
+        /// </summary>
+        /// <returns></returns>
         public List<Auction.Entity.User> GetUsers()
         {
 
@@ -36,6 +43,11 @@ namespace Auction.UI.Sevices
             }
         }
 
+        /// <summary>
+        /// Creates the user.
+        /// </summary>
+        /// <param name="userEntity">The user entity.</param>
+        /// <returns></returns>
         public int CreateUser(User userEntity)
         {
             try
@@ -58,12 +70,13 @@ namespace Auction.UI.Sevices
 
 
                 }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
 
-            
+
         }
 
         public bool DeleteUser(int userId)
@@ -71,6 +84,10 @@ namespace Auction.UI.Sevices
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets all users.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Auction.Entity.User> GetAllUsers()
         {
             using (var client = new HttpClient())
@@ -94,6 +111,11 @@ namespace Auction.UI.Sevices
                 return userobj;
         }
 
+        /// <summary>
+        /// Gets the user by identifier.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <returns></returns>
         public User GetUserById(string userName)
         {
             try
@@ -127,6 +149,7 @@ namespace Auction.UI.Sevices
             }
             catch(Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
 
@@ -137,6 +160,12 @@ namespace Auction.UI.Sevices
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Determines whether [is valid user] [the specified user name].
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <param name="userPassword">The user password.</param>
+        /// <returns></returns>
         public User IsValidUser(string userName, string userPassword)
         {
             try
@@ -167,6 +196,7 @@ namespace Auction.UI.Sevices
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
         }

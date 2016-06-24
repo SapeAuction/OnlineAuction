@@ -1,5 +1,6 @@
 ﻿using Auction.Entity;
 using Auction.UI.Sevices;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace OnlineAuction.Controllers
 {
     public class ProductsController : Controller
     {
+        private static readonly ILog logger = LogManager.GetLogger(typeof(string));
+
         // GET: Products
         public ActionResult Index()
         {
@@ -42,8 +45,9 @@ namespace OnlineAuction.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
+                logger.Error(ex.Message);
                 return View();
             }
         }
@@ -64,8 +68,9 @@ namespace OnlineAuction.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
+                logger.Error(ex.Message);
                 return View();
             }
         }
@@ -86,8 +91,9 @@ namespace OnlineAuction.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch ( Exception ex)
             {
+                logger.Error(ex.Message);
                 return View();
             }
         }

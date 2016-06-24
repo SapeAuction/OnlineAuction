@@ -8,14 +8,20 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using Auction.UI.Sevices;
+using log4net;
 
 namespace Auction.Sevices
 {
     public class AuctionService : IAuctionService
     {
-
         private List<Auction.Entity.AuctionInformation> _auctionInformationList;
-       
+        private static readonly ILog logger = LogManager.GetLogger(typeof(string));
+
+        /// <summary>
+        /// Creates the auction information.
+        /// </summary>
+        /// <param name="auctionInformationEntity">The auction information entity.</param>
+        /// <returns></returns>
         public int CreateAuctionInformation(AuctionInformation auctionInformationEntity)
         {
             try
@@ -37,10 +43,16 @@ namespace Auction.Sevices
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
         }
 
+        /// <summary>
+        /// Deletes the auction information.
+        /// </summary>
+        /// <param name="auctionId">The auction identifier.</param>
+        /// <returns></returns>
         public bool DeleteAuctionInformation(int auctionId)
         {
             bool status = true; 
@@ -66,13 +78,18 @@ namespace Auction.Sevices
                     return status;
                 }
             }
-            catch
+            catch ( Exception ex)
             {
-                throw new Exception();
+                logger.Error(ex.Message);
+                throw ex;
             }
             
         }
 
+        /// <summary>
+        /// Gets all auction information.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<AuctionInformation> GetAllAuctionInformation()
         {
             try
@@ -95,13 +112,18 @@ namespace Auction.Sevices
                 }
                 return _auctionInformationList;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                logger.Error(ex.Message);
+                throw ex;
             }
-            
+
         }
 
+        /// <summary>
+        /// Gets the current sales.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<SP_GetMaxBidUserDetails_Result> GetCurrentSales()
         {
             IEnumerable<SP_GetMaxBidUserDetails_Result> salesDetails = new List<SP_GetMaxBidUserDetails_Result>();
@@ -126,11 +148,18 @@ namespace Auction.Sevices
 
                 return salesDetails;
             }
-            catch {
-                throw new Exception();
+            catch (Exception ex)
+            {
+                logger.Error(ex.Message);
+                throw ex;
             }
         }
 
+        /// <summary>
+        /// Gets the auction information by identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
         public AuctionInformation GetAuctionInformationById(int userId)
         {
             try
@@ -154,12 +183,19 @@ namespace Auction.Sevices
                 }
                 return _auctionInformation;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new NotImplementedException();
+                logger.Error(ex.Message);
+                throw ex;
             }
         }
 
+        /// <summary>
+        /// Updates the auction information.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="userEntity">The user entity.</param>
+        /// <returns></returns>
         public bool UpdateAuctionInformation(int id,AuctionInformation userEntity)
         {
             try
@@ -180,12 +216,18 @@ namespace Auction.Sevices
                 }
                 return true; 
             }
-            catch
+            catch (Exception ex)
             {
-                throw new NotImplementedException();
+                logger.Error(ex.Message);
+                throw ex;
             }
         }
 
+        /// <summary>
+        /// Saves the latest bid information.
+        /// </summary>
+        /// <param name="bidInfo">The bid information.</param>
+        /// <returns></returns>
         public bool saveLatestBidInformation(BidParticipantInformation bidInfo)
         {
             bool status = true;
@@ -208,10 +250,10 @@ namespace Auction.Sevices
                 }
                 return status;
             }
-            catch
+            catch (Exception ex)
             {
-
-                throw new Exception();
+                logger.Error(ex.Message);
+                throw ex;
             }
         }
     }

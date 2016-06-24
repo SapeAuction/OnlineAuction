@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 using Auction.Entity;
 using Auction.WebApi.Sevices.Interfaces;
 using Auction.WebApi.DataModel;
+using log4net;
 
 namespace Auction.WebApi.Sevices.Implementations
 {
     public class BidService : IBidService
     {
+        private static readonly ILog logger = LogManager.GetLogger(typeof(string));
         private AuctionDBEntities db = new AuctionDBEntities();
+
+        /// <summary>
+        /// Creates the bid participant information.
+        /// </summary>
+        /// <param name="bidParticipantInformationEntity">The bid participant information entity.</param>
+        /// <returns></returns>
         public int CreateBidParticipantInformation(BidParticipantInformation bidParticipantInformationEntity)
         {
             try
@@ -24,12 +32,16 @@ namespace Auction.WebApi.Sevices.Implementations
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
-
-
         }
 
+        /// <summary>
+        /// Deletes the bid participant information.
+        /// </summary>
+        /// <param name="bidParticipantInformationEntity">The bid participant information entity.</param>
+        /// <returns></returns>
         public bool DeleteBidParticipantInformation(BidParticipantInformation bidParticipantInformationEntity)
         {
             bool isSuccess = true;
@@ -41,6 +53,10 @@ namespace Auction.WebApi.Sevices.Implementations
             return isSuccess;
         }
 
+        /// <summary>
+        /// Gets all bid participant information.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<BidParticipantInformation> GetAllBidParticipantInformation()
         {
             try
@@ -69,9 +85,10 @@ namespace Auction.WebApi.Sevices.Implementations
 
                 return BidParticipantDetails;
             }
-            catch
+            catch (Exception ex)
             {
-                throw new Exception();
+                logger.Error(ex.Message);
+                throw ex;
             }
 
         }
@@ -81,6 +98,11 @@ namespace Auction.WebApi.Sevices.Implementations
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Updates the bid participant information.
+        /// </summary>
+        /// <param name="bidParticipantInformation">The bid participant information.</param>
+        /// <returns></returns>
         public bool UpdateBidParticipantInformation(BidParticipantInformation bidParticipantInformation)
         {
             bool isSuccess = true;
@@ -95,6 +117,11 @@ namespace Auction.WebApi.Sevices.Implementations
             return isSuccess;
         }
 
+        /// <summary>
+        /// Maximums the bid price.
+        /// </summary>
+        /// <param name="ProductId">The product identifier.</param>
+        /// <returns></returns>
         public float MaxBidPrice(int ProductId)
         {
             //            SELECT MAX(BidParticipantInformation.BidPrice)
