@@ -14,6 +14,13 @@ namespace Auction.UI.Sevices
     public class BidService : IBidService
     {
         private List<Auction.Entity.BidParticipantInformation> _bidParticipentList ;
+
+        /// <summary>
+        /// Creates the bid participant information.
+        /// </summary>
+        /// <param name="bidParticipantInformationEntity">The bid participant information entity.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public int CreateBidParticipantInformation(BidParticipantInformation bidParticipantInformationEntity)
         {
             throw new NotImplementedException();
@@ -24,6 +31,10 @@ namespace Auction.UI.Sevices
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets all bid participant information.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<BidParticipantInformation> GetAllBidParticipantInformation()
         {
             using (var client = new HttpClient())
@@ -46,6 +57,10 @@ namespace Auction.UI.Sevices
             return _bidParticipentList;
         }
 
+        /// <summary>
+        /// Gets all bid participant information1.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<BidParticipantInformation>> GetAllBidParticipantInformation1()
         {
             using (var client = new HttpClient())

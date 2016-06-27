@@ -44,9 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\OnlineAuction\AuctionWebApi\AuctionWebApi\bin\log4net.dll</HintPath>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -262,6 +262,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\PageScripts\AuctionSales.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -328,6 +329,10 @@
     <ProjectReference Include="..\Auction.Sevices\Auction.UI.Sevices.csproj">
       <Project>{7af04c07-8a67-4218-8f33-e32844d85abc}</Project>
       <Name>Auction.UI.Sevices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Auction.Utilities\Auction.Utilities.csproj">
+      <Project>{693113c7-84c1-4fd7-add4-d181a3dcfb3e}</Project>
+      <Name>Auction.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

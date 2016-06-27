@@ -243,3 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/Auction.WebApi.Sevices/Implementations/IUserService.cs

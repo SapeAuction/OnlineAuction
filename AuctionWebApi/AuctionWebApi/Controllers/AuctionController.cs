@@ -23,6 +23,10 @@ namespace AuctionWebApi.Controllers
         }
 
         // GET: api/Auction
+        /// <summary>
+        /// Gets sales ( auction ) details
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<SP_GetMaxBidUserDetails_Result> Get()
         {
             logger.Debug("api/Auction");
@@ -30,6 +34,11 @@ namespace AuctionWebApi.Controllers
         }
 
 
+        /// <summary>
+        /// Gets Auctions information by ID
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/Auction/GetbyID/{id}")]
         public IEnumerable<AuctionInformation> GetbyID(int id)

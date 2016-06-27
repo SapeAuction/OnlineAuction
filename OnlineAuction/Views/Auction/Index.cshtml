@@ -5,7 +5,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@Scripts.Render("~/bundles/pagescripts")
 <h2>Active Auctions</h2>
 
 <p>
@@ -17,3 +17,11 @@
 {
     @Html.Partial("_ProductPartial", item)
 }
+
+
+<script>
+    $(document).ready(function () {
+        console.log("ready!");
+        AuctionSales.Load();
+    });
+</script>

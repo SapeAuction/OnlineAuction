@@ -6,14 +6,20 @@ using System.Threading.Tasks;
 using Auction.Entity;
 using Auction.WebApi.Sevices.Interfaces;
 using Auction.WebApi.DataModel;
-
+using log4net;
 
 namespace Auction.WebApi.Sevices.Implementations
 {
     public class ProductService : IProductService
     {
-
+        private static readonly ILog logger = LogManager.GetLogger(typeof(string));
         private AuctionDBEntities db = new AuctionDBEntities();
+
+        /// <summary>
+        /// Creates the product.
+        /// </summary>
+        /// <param name="productEntity">The product entity.</param>
+        /// <returns></returns>
         public int CreateProduct(Product productEntity)
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -21,22 +27,31 @@ namespace Auction.WebApi.Sevices.Implementations
             {
                 if (db.Products.Add(productEntity) != null)
                     db.SaveChanges();
-
-
-
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
+
             return productEntity.ProductId;
         }
 
+        /// <summary>
+        /// Deletes the product.
+        /// </summary>
+        /// <param name="productId">The product identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public bool DeleteProduct(int productId)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets all products.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Product> GetAllProducts()
         {
             try
@@ -54,13 +69,19 @@ namespace Auction.WebApi.Sevices.Implementations
 
                 return ProductList;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
-            
+
         }
 
+        /// <summary>
+        /// Gets the product by identifier.
+        /// </summary>
+        /// <param name="productId">The product identifier.</param>
+        /// <returns></returns>
         public Product GetProductById(int productId)
         {
             try
@@ -80,6 +101,7 @@ namespace Auction.WebApi.Sevices.Implementations
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
         }

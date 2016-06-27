@@ -1,62 +1,54 @@
 ﻿@model Auction.Entity.SP_GetMaxBidUserDetails_Result
 
-
 @using (Html.BeginForm("PlaceBid", "Auction", new { AuctionInformationId = Model.AuctionInformationId, UserId = Model.UserId }))
 {
-    
-
     @Html.HiddenFor(i => Model.AuctionInformationId)
     @Html.HiddenFor(i => Model.UserId)
 
-    <table class="table" border="0">
-        <tr>
-            <td width="25%">
-                @Html.Image(@Model.ProductImageUrl, "", "125")
-                <br />
-                <b>From :</b> @Html.DisplayFor(modelItem => Model.BidStartDateTime)
-                <br />
-                <b>To :</b>   @Html.DisplayFor(modelItem => Model.BidEndDateTime)
-            </td>
-            <td>
-                <div style="font-size:xx-large;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:black;font-weight:700">
+    <div id="@Model.AuctionInformationId">
+        @Html.Hidden("oldBidPrice", Model.MaxBidPrice);
 
-                    @Html.DisplayFor(modelItem => Model.ProductName)
-                </div>
-              
-              
-                @Html.ActionLink("Edit", "Edit", new { Id = Model.AuctionInformationId })
-                |
-                @Html.ActionLink("Deactivate", "Deactivate", new { Id = Model.AuctionInformationId })
+        <table class="table" border="0">
+            <tr>
+                <td width="25%">
+                    @Html.Image(@Model.ProductImageUrl, "", "125")
+                    <br />
+                    <b>From :</b> @Html.DisplayFor(modelItem => Model.BidStartDateTime)
+                    <br />
+                    <b>To :</b>   @Html.DisplayFor(modelItem => Model.BidEndDateTime)
+                </td>
+                <td>
+                    <div style="font-size:xx-large;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;color:black;font-weight:700">
 
-                <br />
+                        @Html.DisplayFor(modelItem => Model.ProductName)
+                    </div>
 
-                <b>Description:</b>@Html.DisplayFor(modelItem => Model.ProductDescription)
-                <br />
-                <b>
-                    Bid Base Price
-                </b> : INR @Html.DisplayFor(modelItem => Model.BidBasePrice)
-                <br />
-                <b>
-                    Bid Running Price
-                </b> : INR @Html.DisplayFor(modelItem => Model.MaxBidPrice)
-                <br />
-                <b>New Bid Price</b> : INR <input type="text" alt="decimal value" maxlength="10" title="newBidValue" name="newBidPrice" id="newBidPrice" tooltip="Enter decimal bid amount" />
+                    @Html.ActionLink("Edit", "Edit", new { Id = Model.AuctionInformationId })
+                    |
+                    @Html.ActionLink("Deactivate", "Deactivate", new { Id = Model.AuctionInformationId })
 
-                <input type="submit" value="Place Bid" class="button" />
-            
-                <br />
-                <div id="ValidationMessage" style="font-family:'Times New Roman', Times, serif;color:rosybrown;font-size:medium;">
-                    <i>Validation messages displayed here</i>
-                </div>
-            </td>
-        </tr>
-    </table>
+                    <br />
 
-}
-<div>
-    <div id="hitCount">
+                    <b>Description:</b>@Html.DisplayFor(modelItem => Model.ProductDescription)
+                    <br />
+                    <b>
+                        Bid Base Price
+                    </b> : INR @Html.DisplayFor(modelItem => Model.BidBasePrice)
+                    <br />
+                    <b>
+                        Bid Running Price
+                    </b> : INR @Html.DisplayFor(modelItem => Model.MaxBidPrice)
+                    <br />
+                    <b>New Bid Price</b> : INR <input type="text" alt="decimal value" maxlength="10" title="newBidValue" name="newBidPrice" id="newBidPrice" tooltip="Enter decimal bid amount" />
 
+                    <input type="submit" value="Place Bid" class="button" onclick="return AuctionSales.ValidateNPlaceBid(@Model.AuctionInformationId);" />
+
+                    <br />
+                    <div id="ValidationMessage" class="text-danger">
+                        <i></i>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
-</div>
-
-
+}

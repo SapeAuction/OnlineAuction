@@ -29,6 +29,8 @@ namespace Auction.Entity
         public bool Status { get; set; }
         public System.DateTime CreatedDate { get; set; }
 
+        public string EmailId { get; set; }
+
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
 

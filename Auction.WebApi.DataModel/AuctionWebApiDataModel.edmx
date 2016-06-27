@@ -51,10 +51,11 @@
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" />
           <Property Name="Address" Type="nvarchar" MaxLength="30" />
           <Property Name="Status" Type="bit" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <Association Name="FK_AuctionInformation_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
@@ -202,12 +203,13 @@
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Boolean" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AuctionInformations" Relationship="Self.FK_AuctionInformation_User" FromRole="User" ToRole="AuctionInformation" />
           <NavigationProperty Name="BidParticipantInformations" Relationship="Self.FK_BidParticipantInformation_User" FromRole="User" ToRole="BidParticipantInformation" />
+          <Property Name="EmailId" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_AuctionInformation_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
@@ -364,6 +366,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AuctionDBModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Auction.Sevices;
 using Auction.Entity;
+using Auction.UI.Sevices;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
+using System.Text;
+using log4net;
 
 namespace OnlineAuction.Controllers
 {
+    [HandleError]
     [Authorize]
     public class AuctionController : Controller
     {
-
+        private static readonly ILog logger = LogManager.GetLogger(typeof(string));
         private Auction.Sevices.AuctionService _auctionService = new AuctionService();
 
-        // GET: Auction
+        /// <summary>
+        /// Lists the active sales ( Open auctions ) - GET:
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             IEnumerable<SP_GetMaxBidUserDetails_Result> _auctionInformationList = _auctionService.GetCurrentSales();
@@ -25,7 +37,11 @@ namespace OnlineAuction.Controllers
             return View();
         }
 
-        // GET: Auction/Create
+        // 
+        /// <summary>
+        /// Diplays Create Auction Page. GET: Auction/Create
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             IList<SelectListItem> productListType = new List<SelectListItem>
@@ -34,7 +50,6 @@ namespace OnlineAuction.Controllers
                 new SelectListItem{Text = "Clothing", Value = "2"},
                 new SelectListItem{Text = "Spotrs", Value = "3"},
                 new SelectListItem{Text = "Furniture", Value = "4"},
-
             };
 
             ViewBag.typeList = productListType;
@@ -70,8 +85,9 @@ namespace OnlineAuction.Controllers
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 return View();
             }
         }
@@ -121,8 +137,9 @@ namespace OnlineAuction.Controllers
                 _auctionService.UpdateAuctionInformation(id, collection);
                 return RedirectToAction("Index");
             }
-            catch
+            catch ( Exception ex)
             {
+                logger.Error(ex.Message);
                 return View();
             }
         }
@@ -142,8 +159,9 @@ namespace OnlineAuction.Controllers
                 // TODO: Add delete logic here
                 return RedirectToAction("Index");
             }
-            catch
+            catch ( Exception ex)
             {
+                logger.Error(ex.Message);
                 return View();
             }
         }
@@ -164,8 +182,9 @@ namespace OnlineAuction.Controllers
             {
                 _auctionService.saveLatestBidInformation(placeBidInfo);
             }
-            catch
+            catch ( Exception ex)
             {
+                logger.Error(ex.Message);
                 return View();
             }
             return RedirectToAction("Index", "Auction");

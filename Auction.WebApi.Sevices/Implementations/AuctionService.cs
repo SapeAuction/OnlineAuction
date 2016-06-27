@@ -7,17 +7,22 @@ using Auction.Entity;
 
 using Auction.WebApi.Sevices.Interfaces;
 using Auction.WebApi.DataModel;
+using log4net;
 
 namespace Auction.WebApi.Sevices.Implementations
 {
     public class AuctionService : IAuctionService
     {
-
+        private static readonly ILog logger = LogManager.GetLogger(typeof(string));
         private AuctionDBEntities db = new AuctionDBEntities();
 
+        /// <summary>
+        /// Creates the auction information.
+        /// </summary>
+        /// <param name="auctionInformationEntity">The auction information entity.</param>
+        /// <returns></returns>
         public bool CreateAuctionInformation(AuctionInformation auctionInformationEntity)
         {
-            
             try
             {
                 auctionInformationEntity.BidStartDateTime = DateTime.Now;
@@ -28,16 +33,21 @@ namespace Auction.WebApi.Sevices.Implementations
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
 
         }
 
+        /// <summary>
+        /// Deletes the auction information.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public bool DeleteAuctionInformation(int id)
         {
             try
             {
-
                 AuctionInformation auctionObj = (from auc in db.AuctionInformations
                                                  where auc.AuctionInformationId == id
                                                  select auc).FirstOrDefault();
@@ -51,11 +61,17 @@ namespace Auction.WebApi.Sevices.Implementations
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
+
             return false;
         }
 
+        /// <summary>
+        /// Gets all auction information.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<SP_GetMaxBidUserDetails_Result> GetAllAuctionInformation()
         {
             IEnumerable<SP_GetMaxBidUserDetails_Result> salesDetails = null;
@@ -91,6 +107,7 @@ namespace Auction.WebApi.Sevices.Implementations
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
 
@@ -98,6 +115,11 @@ namespace Auction.WebApi.Sevices.Implementations
         }
 
 
+        /// <summary>
+        /// Gets all auction information by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public IEnumerable<AuctionInformation> GetAllAuctionInformationByID(int id)
         {
 
@@ -134,11 +156,17 @@ namespace Auction.WebApi.Sevices.Implementations
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
 
         }
 
+        /// <summary>
+        /// Gets the auction information by identifier.
+        /// </summary>
+        /// <param name="userId">The user identifier.</param>
+        /// <returns></returns>
         public AuctionInformation GetAuctionInformationById(int userId)
         {
             try
@@ -172,10 +200,16 @@ namespace Auction.WebApi.Sevices.Implementations
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
         }
 
+        /// <summary>
+        /// Updates the auction information.
+        /// </summary>
+        /// <param name="userEntity">The user entity.</param>
+        /// <returns></returns>
         public bool UpdateAuctionInformation(AuctionInformation userEntity)
         {
 
@@ -199,8 +233,10 @@ namespace Auction.WebApi.Sevices.Implementations
             }
             catch (Exception ex)
             {
+                logger.Error(ex.Message);
                 throw ex;
             }
+
             return false;
 
         }
