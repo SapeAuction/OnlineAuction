@@ -23,7 +23,7 @@ namespace Auction.UI.Sevices
         /// Gets the users.
         /// </summary>
         /// <returns></returns>
-        public List<Auction.Entity.User> GetUsers()
+        public virtual List<Auction.Entity.User> GetUsers()
         {
 
             using (var client = new HttpClient())

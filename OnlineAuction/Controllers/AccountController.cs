@@ -76,8 +76,13 @@ namespace OnlineAuction.Controllers
             if (ModelState.IsValid)
             {
                 IUserService userService = new UserService();
-                var result = userService.IsValidUser(model.UserName, model.Password);
-                if (result != null)
+                //Will have get the password as per User Id
+                var result = userService.GetUserById(model.UserName);
+                string userEnteredpwd = model.Password;
+                string passdcp = Auction.Utilities.StringEncriptDecrypt.Decrypt(result.Password);
+              //var result = userService.IsValidUser(model.UserName, model.Password);
+
+                if ((result != null) && (passdcp==model.Password))
                 {
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
                      1,
@@ -101,7 +106,7 @@ namespace OnlineAuction.Controllers
                     ModelState.AddModelError("", "Incorrect username and/or password");
                 }
             }
-            return View(model);
+            return View();//RedirectToAction("Login", "Account");
         }
         ////
         //// POST: /Account/Login
@@ -190,8 +195,7 @@ namespace OnlineAuction.Controllers
         {
             return View();
         }
-
-
+        
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -202,11 +206,11 @@ namespace OnlineAuction.Controllers
         {
             Auction.Entity.User objus1 = new Auction.Entity.User();
             objus1.UserName = model.UserName;
-            objus1.Password = model.Password;
+            objus1.Password = Auction.Utilities.StringEncriptDecrypt.Encrypt(model.Password);
             objus1.CreatedDate = model.CreatedDate;
             objus1.Address = model.Address;
             objus1.Status = true;
-
+            
             int resu = _objUserService.CreateUser(objus1);
 
             if (resu == 1)
@@ -215,7 +219,7 @@ namespace OnlineAuction.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Register"); //Register
+                return RedirectToAction("Register","Account"); //Register
             }
 
 
