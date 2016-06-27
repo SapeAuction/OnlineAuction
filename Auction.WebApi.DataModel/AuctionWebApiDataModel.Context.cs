@@ -15,6 +15,7 @@ namespace Auction.WebApi.DataModel
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
     using System.Linq;
+    using Auction.Entity;
     
     public partial class AuctionDBEntities : DbContext
     {

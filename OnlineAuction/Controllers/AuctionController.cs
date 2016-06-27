@@ -31,10 +31,11 @@ namespace OnlineAuction.Controllers
             return View(_auctionInformationList);
         }
 
-        // GET: Auction/Details/5
-        public ActionResult Details(int id)
+        
+        public ActionResult Details(SP_GetMaxBidUserDetails_Result auctionInformation)
         {
-            return View();
+
+            return View(auctionInformation);
         }
 
         // 

@@ -1,4 +1,6 @@
 ﻿@model Auction.Entity.SP_GetMaxBidUserDetails_Result
+@using Auction.Entity;
+
 
 @using (Html.BeginForm("PlaceBid", "Auction", new { AuctionInformationId = Model.AuctionInformationId, UserId = Model.UserId }))
 {
@@ -6,7 +8,7 @@
     @Html.HiddenFor(i => Model.UserId)
 
     <div id="@Model.AuctionInformationId">
-        @Html.Hidden("oldBidPrice", Model.MaxBidPrice);
+        @Html.Hidden("oldBidPrice", Model.MaxBidPrice)
 
         <table class="table" border="0">
             <tr>
@@ -23,6 +25,24 @@
                         @Html.DisplayFor(modelItem => Model.ProductName)
                     </div>
 
+
+                    @{
+                        var AuctionInformation = new SP_GetMaxBidUserDetails_Result
+                        {
+                            AuctionInformationId = (int)Model.AuctionInformationId,
+                            BidBasePrice = (int)Model.BidBasePrice,
+                            ProductDescription = (string)Model.ProductDescription,
+                            BidEndDateTime = (DateTime)Model.BidEndDateTime,
+                            BidStartDateTime = (DateTime)Model.BidCreationDateTime,
+                            ProductId = (int)Model.ProductId,
+                            ProductName = (string)Model.ProductName,
+                            ProductImageUrl=(string)Model.ProductImageUrl        
+                        };
+                    }
+
+                
+                    @Html.ActionLink("View", "Details", "Auction", AuctionInformation , null)
+                    |
                     @Html.ActionLink("Edit", "Edit", new { Id = Model.AuctionInformationId })
                     |
                     @Html.ActionLink("Deactivate", "Deactivate", new { Id = Model.AuctionInformationId })
@@ -41,7 +61,7 @@
                     <br />
                     <b>New Bid Price</b> : INR <input type="text" alt="decimal value" maxlength="10" title="newBidValue" name="newBidPrice" id="newBidPrice" tooltip="Enter decimal bid amount" />
 
-                    <input type="submit" value="Place Bid" class="button" onclick="return AuctionSales.ValidateNPlaceBid(@Model.AuctionInformationId);" />
+                    <input type="submit" value="Place Bid" class="button" onclick="return AuctionSales.ValidateNPlaceBid(@Model.AuctionInformationId)" />
 
                     <br />
                     <div id="ValidationMessage" class="text-danger">
