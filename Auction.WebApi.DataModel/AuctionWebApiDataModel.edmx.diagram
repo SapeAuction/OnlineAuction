@@ -7,7 +7,7 @@
       <Diagram DiagramId="8f459135043842fe84dd8790789272c0" Name="Diagram1">
         <EntityTypeShape EntityType="AuctionDBModel.AuctionInformation" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="AuctionDBModel.BidParticipantInformation" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AuctionDBModel.Product" Width="1.5" PointX="1.125" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuctionDBModel.Product" Width="1.5" PointX="1.5" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AuctionDBModel.ProductType" Width="1.5" PointX="4.5" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AuctionDBModel.User" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="AuctionDBModel.FK_AuctionInformation_Product" ManuallyRouted="false" />

@@ -156,6 +156,13 @@ namespace Auction.Sevices
             }
         }
 
+        /// <summary>
+        /// Updates the auction information.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="userEntity">The user entity.</param>
+        /// <returns></returns>
+        /// <exception cref="System.NotImplementedException"></exception>
         public bool UpdateAuctionInformation(int id,AuctionInformation userEntity)
         {
             try
