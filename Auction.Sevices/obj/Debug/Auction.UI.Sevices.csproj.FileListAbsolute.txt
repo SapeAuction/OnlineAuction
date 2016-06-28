@@ -43,3 +43,14 @@ D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Sevices\bin\Debug\
 D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Sevices\obj\Debug\Auction.UI.Sevices.csprojResolveAssemblyReference.cache
 D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Sevices\obj\Debug\Auction.Sevices.dll
 D:\Projects\GitHub\onlineAuction_21last\OnlineAuction\Auction.Sevices\obj\Debug\Auction.Sevices.pdb
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\bin\Debug\Auction.Sevices.dll
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\bin\Debug\Auction.Sevices.pdb
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\bin\Debug\Auction.Entity.dll
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\bin\Debug\log4net.dll
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\bin\Debug\Auction.Entity.pdb
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\bin\Debug\log4net.xml
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\obj\Debug\Auction.UI.Sevices.csprojResolveAssemblyReference.cache
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\obj\Debug\Auction.Sevices.dll
+D:\Projects\GitHub\IshanCheck\Auction.Sevices\obj\Debug\Auction.Sevices.pdb

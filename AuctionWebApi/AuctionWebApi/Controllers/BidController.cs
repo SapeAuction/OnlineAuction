@@ -26,9 +26,9 @@ namespace AuctionWebApi.Controllers
         }
 
         // GET: api/Bid/5
-        public string Get(int id)
+        public BidParticipantInformation Get(int id)
         {
-            return "value";
+            return _repository.GetBidParticipantInformationById(id);
         }
 
         // POST: api/Bid

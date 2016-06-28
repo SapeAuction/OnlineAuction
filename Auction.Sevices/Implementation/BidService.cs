@@ -86,7 +86,34 @@ namespace Auction.UI.Sevices
 
         public BidParticipantInformation GetBidParticipantInformationById(int userId)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                BidParticipantInformation _auctionInformation = null;
+                using (var client = new HttpClient())
+
+                {
+                    client.BaseAddress = new Uri("http://localhost:58167/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+                    HttpResponseMessage responseMessage = client.GetAsync("/api/Bid/" + userId).Result;
+
+                    if (responseMessage.IsSuccessStatusCode)
+                    {
+                        var responseData = responseMessage.Content.ReadAsStringAsync().Result;
+                        _auctionInformation = JsonConvert.DeserializeObject<BidParticipantInformation>(responseData);
+                    }
+                }
+                return _auctionInformation;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
         }
 
         public float MaxBidPrice(int ProductId)

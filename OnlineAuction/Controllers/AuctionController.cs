@@ -25,16 +25,37 @@ namespace OnlineAuction.Controllers
         /// Lists the active sales ( Open auctions ) - GET:
         /// </summary>
         /// <returns></returns>
+
         public ActionResult Index()
         {
             IEnumerable<SP_GetMaxBidUserDetails_Result> _auctionInformationList = _auctionService.GetCurrentSales();
             return View(_auctionInformationList);
         }
 
-        
         public ActionResult Details(SP_GetMaxBidUserDetails_Result auctionInformation)
         {
+            BidService bidService = new BidService();
+            BidParticipantInformation bidParticipantInformation = null;
+            try
+            {
+                bidParticipantInformation = bidService.GetBidParticipantInformationById((int)auctionInformation.AuctionInformationId);
+            }
+            catch
+            {
 
+            }
+            if (bidParticipantInformation != null)
+            {
+
+                auctionInformation.MaxBidPrice = bidParticipantInformation.BidPrice;
+
+            }
+            else
+            {
+                auctionInformation.MaxBidPrice =(int)auctionInformation.BidBasePrice;
+            }
+
+            auctionInformation.UserId = Convert.ToInt32(Session["userId"].ToString());
             return View(auctionInformation);
         }
 
@@ -128,7 +149,7 @@ namespace OnlineAuction.Controllers
 
         }
 
-        // POST: Auction/Edit/5
+
         [HttpPost]
         public ActionResult Edit(int id, AuctionInformation collection)
         {
@@ -196,6 +217,12 @@ namespace OnlineAuction.Controllers
         {
             _auctionService.DeleteAuctionInformation(id);
             return RedirectToAction("Index", "Auction");
+        }
+
+        
+        public ActionResult LatestBid(BidParticipantInformation id)
+        {
+             return RedirectToAction("Index", "Auction");
         }
 
     }

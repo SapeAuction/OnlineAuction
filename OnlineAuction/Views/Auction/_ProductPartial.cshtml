@@ -2,10 +2,30 @@
 @using Auction.Entity;
 
 
-@using (Html.BeginForm("PlaceBid", "Auction", new { AuctionInformationId = Model.AuctionInformationId, UserId = Model.UserId }))
+@{
+    var AuctionInformation = new SP_GetMaxBidUserDetails_Result
+    {
+        AuctionInformationId = (int)Model.AuctionInformationId,
+        BidBasePrice = (int)Model.BidBasePrice,
+        ProductDescription = (string)Model.ProductDescription,
+        BidEndDateTime = (DateTime)Model.BidEndDateTime,
+        BidStartDateTime = (DateTime)Model.BidCreationDateTime,
+        ProductId = (int)Model.ProductId,
+        ProductName = (string)Model.ProductName,
+        ProductImageUrl = (string)Model.ProductImageUrl
+    };
+}
+
+@using (Html.BeginForm("Details", "Auction", FormMethod.Post))
 {
     @Html.HiddenFor(i => Model.AuctionInformationId)
-    @Html.HiddenFor(i => Model.UserId)
+    @Html.HiddenFor(i => Model.BidBasePrice)
+    @Html.HiddenFor(i => Model.ProductDescription)
+    @Html.HiddenFor(i => Model.BidEndDateTime)
+    @Html.HiddenFor(i => Model.BidCreationDateTime)
+    @Html.HiddenFor(i => Model.ProductId)
+    @Html.HiddenFor(i => Model.ProductName)
+    @Html.HiddenFor(i => Model.ProductImageUrl)
 
     <div id="@Model.AuctionInformationId">
         @Html.Hidden("oldBidPrice", Model.MaxBidPrice)
@@ -24,24 +44,8 @@
 
                         @Html.DisplayFor(modelItem => Model.ProductName)
                     </div>
-
-
-                    @{
-                        var AuctionInformation = new SP_GetMaxBidUserDetails_Result
-                        {
-                            AuctionInformationId = (int)Model.AuctionInformationId,
-                            BidBasePrice = (int)Model.BidBasePrice,
-                            ProductDescription = (string)Model.ProductDescription,
-                            BidEndDateTime = (DateTime)Model.BidEndDateTime,
-                            BidStartDateTime = (DateTime)Model.BidCreationDateTime,
-                            ProductId = (int)Model.ProductId,
-                            ProductName = (string)Model.ProductName,
-                            ProductImageUrl=(string)Model.ProductImageUrl        
-                        };
-                    }
-
                 
-                    @Html.ActionLink("View", "Details", "Auction", AuctionInformation , null)
+                    @Html.ActionLink("View", "Details", "Auction", AuctionInformation , new { @class = "viewProduct", onclick = "return false;" })
                     |
                     @Html.ActionLink("Edit", "Edit", new { Id = Model.AuctionInformationId })
                     |
@@ -54,14 +58,14 @@
                     <b>
                         Bid Base Price
                     </b> : INR @Html.DisplayFor(modelItem => Model.BidBasePrice)
-                    <br />
-                    <b>
-                        Bid Running Price
-                    </b> : INR @Html.DisplayFor(modelItem => Model.MaxBidPrice)
-                    <br />
-                    <b>New Bid Price</b> : INR <input type="text" alt="decimal value" maxlength="10" title="newBidValue" name="newBidPrice" id="newBidPrice" tooltip="Enter decimal bid amount" />
+                   @* <br />
+    <b>
+        Bid Running Price
+    </b> : INR @Html.DisplayFor(modelItem => Model.MaxBidPrice)
+    <br />
+    <b>New Bid Price</b> : INR <input type="text" alt="decimal value" maxlength="10" title="newBidValue" name="newBidPrice" id="newBidPrice" tooltip="Enter decimal bid amount" />
 
-                    <input type="submit" value="Place Bid" class="button" onclick="return AuctionSales.ValidateNPlaceBid(@Model.AuctionInformationId)" />
+    <input type="submit" value="Place Bid" class="button" onclick="return AuctionSales.ValidateNPlaceBid(@Model.AuctionInformationId)" />*@
 
                     <br />
                     <div id="ValidationMessage" class="text-danger">

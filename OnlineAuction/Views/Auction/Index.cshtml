@@ -23,5 +23,9 @@
     $(document).ready(function () {
         console.log("ready!");
         AuctionSales.Load();
+
+        $('.viewProduct').click(function () {
+            $(this).closest('form')[0].submit();
+        });
     });
 </script>

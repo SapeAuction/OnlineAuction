@@ -93,9 +93,18 @@ namespace Auction.WebApi.Sevices.Implementations
 
         }
 
-        public BidParticipantInformation GetBidParticipantInformationById(int userId)
+        public BidParticipantInformation GetBidParticipantInformationById(int acutionId)
         {
-            throw new NotImplementedException();
+
+            db.Configuration.ProxyCreationEnabled = false;
+
+            BidParticipantInformation bidInfo = (from bidinfo in db.BidParticipantInformations
+                                                where bidinfo.AuctionInformationId == acutionId
+                                                orderby bidinfo.BidPrice descending
+                                                select bidinfo).FirstOrDefault();
+
+
+            return bidInfo;
         }
 
         /// <summary>

@@ -5,118 +5,99 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+}   <h2>@Html.ValueFor(model => model.ProductName)</h2>
+    <table width="1020" align="center">
+        <tr>
+            <td style="align-content:stretch;">@Html.Image(@Model.ProductImageUrl, "Product Image", "500")</td>
+            <td>
+                <table width="520">
+                    <tr>
+                        <td align="left">
+                            <h4>@Html.ValueFor(model => model.ProductDescription)</h4>
+                            <hr />
+                            @Html.HiddenFor(model => model.AuctionInformationId)
+                            @Html.HiddenFor(model => model.AuctionInformationId)
+                            @Html.HiddenFor(model => model.UserId)
+                            <table style="width:100%">                                
+                                <tr>
+                                    <td>@Html.Label("Time remaining")</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td> @Html.LabelFor(model => model.BidEndDateTime, "Auction Ends")</td>
+                                    <td>@Html.ValueFor(model => model.BidEndDateTime)</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.BidBasePrice, "Bid Base Price")</td>
+                                    <td>@Html.ValueFor(model => model.BidBasePrice)</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(model => model.MaxBidPrice, "Last Bid Price")
+                                    </td>
+                                    <td>
+                                        <div  id="MaxBidPrice">
+                                            @Html.ValueFor(model => model.MaxBidPrice)
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.Label("Place Your Bid")</td>
+                                    <td>
+                                        @Html.TextBox("bidvalue")
+                                        <input id="saveBid" type="submit" value="Bid" class="btn btn-default" />
+                                    </td>
+                                </tr>                                
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
 <div>
-    <h4>SP_GetMaxBidUserDetails_Result</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AuctionInformationId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AuctionInformationId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BidCreationDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BidCreationDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BidStartDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BidStartDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BidEndDateTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BidEndDateTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxBidPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaxBidPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BidBasePrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BidBasePrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductImageUrl)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductImageUrl)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProductDescription)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProductDescription)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+    @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+
+
+    
+        @*@Html.ActionLink("Back to List", "Index")*@
+
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+<div>
+    <div id="hitCount">
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    $("#saveBid").click(function () {
+        debugger;
+        var con = $.hubConnection();
+        var hub = con.createHubProxy('hitCounter');
+        hub.on('onHitRecorded', function (i) {
+            $('#MaxBidPrice').text(i);
+            $('#bidvalue').val('');
+        });
+
+        var UserId = $('#UserId').val();
+        var AuctionInformationId = $('#AuctionInformationId').val();
+        var bidvalue = $('#bidvalue').val();
+        con.start(function () { hub.invoke('recordHit', UserId, AuctionInformationId, bidvalue); });
+
+    });
+
+</script>
