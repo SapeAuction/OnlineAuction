@@ -89,7 +89,7 @@ namespace OnlineAuction.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    collection.CreatedByUserId = 1;
+                    collection.CreatedByUserId = Convert.ToInt32(Session["userId"].ToString());
                     _auctionService.CreateAuctionInformation(collection);
                     return RedirectToAction("Index");
                 }
@@ -155,7 +155,7 @@ namespace OnlineAuction.Controllers
         {
             try
             {
-                collection.CreatedByUserId = 1;
+                collection.CreatedByUserId = Convert.ToInt32(Session["userId"].ToString());
                 _auctionService.UpdateAuctionInformation(id, collection);
                 return RedirectToAction("Index");
             }
