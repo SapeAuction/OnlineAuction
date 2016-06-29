@@ -7,6 +7,7 @@ using Auction.Entity;
 using Auction.WebApi.DataModel;
 using Auction.WebApi.Sevices.Interfaces;
 using log4net;
+using Auction.Utilities;
 
 namespace Auction.WebApi.Sevices.Implementations
 {
@@ -27,9 +28,10 @@ namespace Auction.WebApi.Sevices.Implementations
             {
                 int createdStatus = default(int);
                 if(userEntity!=null)
-                { 
-                db.Users.Add(userEntity);
-                createdStatus = db.SaveChanges();                
+                {
+                    userEntity.Password = Auction.Utilities.StringEncriptDecrypt.Encrypt(userEntity.Password);
+                    db.Users.Add(userEntity);
+                    createdStatus = db.SaveChanges();                
                 }
                 return createdStatus;
             }

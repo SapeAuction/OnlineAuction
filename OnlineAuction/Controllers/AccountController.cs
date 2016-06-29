@@ -76,13 +76,9 @@ namespace OnlineAuction.Controllers
             if (ModelState.IsValid)
             {
                 IUserService userService = new UserService();
-                //Will have get the password as per User Id
+                //Will have get the user object with password as per User Id
                 var result = userService.GetUserById(model.UserName);
-                string userEnteredpwd = model.Password;
-                string passdcp = Auction.Utilities.StringEncriptDecrypt.Decrypt(result.Password);
-              //var result = userService.IsValidUser(model.UserName, model.Password);
-
-                if ((result != null) && (passdcp==model.Password))
+                if ((result != null) && (result.Password == Auction.Utilities.StringEncriptDecrypt.Encrypt(model.Password)))
                 {
                     FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
                      1,
@@ -91,14 +87,11 @@ namespace OnlineAuction.Controllers
                      DateTime.Now.AddMinutes(15),
                      true, //pass here true, if you want to implement remember me functionality
                      model.UserName.ToString());
-
                     string encTicket = FormsAuthentication.Encrypt(authTicket);
                     HttpCookie faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
                     Response.Cookies.Add(faCookie);
-
                     Session["userName"] = result.UserName;
                     Session["userId"] = result.UserId;
-
                     return RedirectToAction("Index", "Auction");
                 }
                 else
@@ -107,6 +100,7 @@ namespace OnlineAuction.Controllers
                 }
             }
             return View();//RedirectToAction("Login", "Account");
+       
         }
         ////
         //// POST: /Account/Login
@@ -206,20 +200,21 @@ namespace OnlineAuction.Controllers
         {
             Auction.Entity.User objus1 = new Auction.Entity.User();
             objus1.UserName = model.UserName;
-            objus1.Password = Auction.Utilities.StringEncriptDecrypt.Encrypt(model.Password);
+            objus1.Password = model.Password;
             objus1.CreatedDate = model.CreatedDate;
             objus1.Address = model.Address;
             objus1.Status = true;
-            
             int resu = _objUserService.CreateUser(objus1);
-
             if (resu == 1)
             {
+                ModelState.AddModelError("", "User Has been Registerd Successfully");
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                return RedirectToAction("Register","Account"); //Register
+                ModelState.AddModelError("", "User Registration has been faild");
+                return RedirectToAction("Register", "Account"); //Register
+
             }
 
 
